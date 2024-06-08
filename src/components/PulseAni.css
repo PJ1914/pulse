@@ -1,0 +1,36 @@
+/* src/components/PulseAni.css */
+.pulse-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000; /* Black Background */
+}
+
+.pulse-title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #12b1eb; /* Teal Blue Text */
+    animation: pulse 2s infinite;
+    text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733; /* Orange Glow */
+    cursor: pointer;
+}
+
+.pulse-link{
+    text-decoration: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
