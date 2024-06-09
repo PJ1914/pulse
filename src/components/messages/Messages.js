@@ -98,24 +98,14 @@ export default function Messages() {
     ]);
     setLoading(true);
     try {
-      const response = await axios.post(`http://localhost:3001/api/test`, {
-        messages: [
-          {
-            role: 'user',
-            content: [
-              {
-                type: 'text',
-                text: `${prompt}`,
-              },
-            ],
-          },
-        ],
+      const response = await axios.post(`http://localhost:8080/gemini`, {
+        message:prompt
       });
       if (response.status === 200) {
         const data = response.data;
-        console.log(data)
+        console.log(data.response)
         // const msg = data.msg.content[0].text;
-        const msg = data.content
+        const msg = data.response
         setMessages((prevMessages) => [
           ...prevMessages,
           { content: `${msg}`, role: 'bot' },
