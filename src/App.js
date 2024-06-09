@@ -11,9 +11,9 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/pulseai" element={<PulseAni />} />
-                <Route path="/Main" element={<MainWithAxios />} />
-                <Route path="/Messages" element={<MessagesWithAxios />} />
-                <Route path="/Weather" element={<WeatherWithAxios />} /> {/* Add Weather route */}
+                <Route path="/main" element={<MainWithAxios />} />
+                <Route path="/messages" element={<MessagesWithAxios />} />
+                <Route path="/weather" element={<WeatherWithAxios />} /> {/* Add Weather route */}
             </Routes>
         </Router>
     );
