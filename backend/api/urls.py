@@ -1,11 +1,18 @@
 # api/urls.py
+
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import MessageViewSet
+from .views import MessageViewSet, wish_me, take_command, get_weather, search_wikipedia, tell_joke
 
 router = DefaultRouter()
 router.register(r'messages', MessageViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('wish/', wish_me, name='wish_me'),
+    path('command/', take_command, name='take_command'),
+    path('weather/<str:location>/', get_weather, name='get_weather'),
+    path('wiki/<str:query>/', search_wikipedia, name='search_wikipedia'),
+    path('joke/', tell_joke, name='tell_joke'),
+    # Add more URL patterns as needed
 ]

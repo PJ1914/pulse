@@ -4,6 +4,7 @@ import axios from 'axios';
 import PulseAni from './components/PulseAni';
 import Main from './components/Main';
 import Messages from './components/Messages';
+import Weather from './components/Weather'; // Import the Weather component
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <Route path="/" element={<PulseAni />} />
                 <Route path="/Main" element={<MainWithAxios />} />
                 <Route path="/Messages" element={<MessagesWithAxios />} />
+                <Route path="/Weather" element={<WeatherWithAxios />} /> {/* Add Weather route */}
             </Routes>
         </Router>
     );
@@ -21,7 +23,6 @@ function MainWithAxios() {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        // Fetch data from Django API when the component mounts
         axios.get('http://127.0.0.1:8000/api/main/')
             .then(response => {
                 setData(response.data);
@@ -29,18 +30,15 @@ function MainWithAxios() {
             .catch(error => {
                 console.error('There was an error making the request!', error);
             });
-    }, []); // Empty dependency array ensures the effect runs only once after mounting
+    }, []);
 
-    return (
-        <Main data={data} />
-    );
+    return <Main data={data} />;
 }
 
 function MessagesWithAxios() {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        // Fetch data from Django API when the component mounts
         axios.get('http://127.0.0.1:8000/api/messages/')
             .then(response => {
                 setData(response.data);
@@ -48,11 +46,28 @@ function MessagesWithAxios() {
             .catch(error => {
                 console.error('There was an error making the request!', error);
             });
-    }, []); // Empty dependency array ensures the effect runs only once after mounting
+    }, []);
 
-    return (
-        <Messages data={data} />
-    );
+    return <Messages data={data} />;
+}
+
+function WeatherWithAxios() {
+    const [weatherData, setWeatherData] = useState(null);
+    const [location, setLocation] = useState(''); // State for user input
+
+    useEffect(() => {
+        if (location) { // Fetch data only if location is provided
+            axios.get(`http://127.0.0.1:8000/api/weather/${location}/`)
+                .then(response => {
+                    setWeatherData(response.data);
+                })
+                .catch(error => {
+                    console.error('There was an error fetching the weather data!', error);
+                });
+        }
+    }, [location]); // Dependency on location, fetches weather data when location changes
+
+    return <Weather weatherData={weatherData} setLocation={setLocation} />;
 }
 
 export default App;
