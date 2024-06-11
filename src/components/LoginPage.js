@@ -1,106 +1,110 @@
 // src/components/LoginPage.js
+
 import React from 'react';
-import { Button, TextField, Container, Typography, Box } from '@mui/material';
-import { Google as GoogleIcon, Facebook as FacebookIcon, GitHub as GitHubIcon } from '@mui/icons-material';
-import { primaryColors, accentColors, backgroundColors } from '../components/styles/Colors';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGoogle, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #F3F4F6;
+`;
+
+const FormWrapper = styled.div`
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+`;
+
+const Title = styled.h2`
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1F2937;
+  font-family: 'Roboto', sans-serif;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #E5E7EB;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #1F2937;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: #1D4ED8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2563EB;
+  }
+`;
+
+const SocialButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.bgColor || '#1D4ED8'};
+  margin-bottom: 8px;
+
+  &:hover {
+    background-color: ${(props) => props.hoverColor || '#2563EB'};
+  }
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  margin-right: 8px;
+`;
+
+const Link = styled.a`
+  display: block;
+  text-align: center;
+  color: #2563EB;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 8px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 const LoginPage = () => {
   return (
-    <Container 
-      maxWidth="sm" 
-      sx={{ 
-        backgroundColor: backgroundColors.black, 
-        color: '#FFF', 
-        padding: '20px', 
-        borderRadius: '10px', 
-        textAlign: 'center',
-        marginTop: '100px'
-      }}
-    >
-      <Typography variant="h4" sx={{ marginBottom: '20px', color: primaryColors.tealBlue }}>
-        PULSE AI Login
-      </Typography>
-      <TextField 
-        label="Email" 
-        type='password'
-        variant="outlined" 
-        fullWidth 
-        InputProps={{
-          sx: { 
-            backgroundColor: backgroundColors.black, 
-            color: '#FFF',
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: primaryColors.tealBlue,
-            },
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: accentColors.orange,
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: primaryColors.tealBlue,
-            },
-          },
-        }}
-        InputLabelProps={{
-          sx: { 
-            color: '#FFF' 
-          }
-        }}
-        sx={{ 
-          marginBottom: '20px', 
-        }}
-      />
-      <TextField 
-        label="Password" 
-        type="password" 
-        variant="outlined" 
-        fullWidth 
-        InputProps={{
-          sx: { 
-            backgroundColor: backgroundColors.black, 
-            color: '#FFF',
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: primaryColors.tealBlue,
-            },
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: accentColors.orange,
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: primaryColors.tealBlue,
-            },
-          },
-        }}
-        InputLabelProps={{
-          sx: { 
-            color: '#FFF' 
-          }
-        }}
-        sx={{ 
-          marginBottom: '20px', 
-        }}
-      />
-      <Button 
-        variant="contained" 
-        fullWidth 
-        sx={{ 
-          backgroundColor: primaryColors.tealBlue, 
-          '&:hover': { backgroundColor: primaryColors.deepGreen }, 
-          marginBottom: '20px' 
-        }}
-      >
-        Log In
-      </Button>
-      <Typography variant="body2" sx={{ marginBottom: '20px' }}>or login with</Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button variant="contained" startIcon={<GoogleIcon />} sx={{ backgroundColor: accentColors.orange, flex: 1, marginRight: '10px' }}>
-          Google
-        </Button>
-        <Button variant="contained" startIcon={<FacebookIcon />} sx={{ backgroundColor: accentColors.slateBlue, flex: 1, marginRight: '10px' }}>
-          Facebook
-        </Button>
-        <Button variant="contained" startIcon={<GitHubIcon />} sx={{ backgroundColor: primaryColors.steelGray, flex: 1 }}>
-          GitHub
-        </Button>
-      </Box>
+    <Container>
+      <FormWrapper>
+        <Title>Login</Title>
+        <form>
+          <Input type="text" placeholder="Email" required  />
+          <Input type="password" placeholder="Password" required />
+          <Button type="submit">Login</Button>
+        </form>
+        <SocialButton bgColor="#DB4437" hoverColor="#C1351B">
+          <Icon icon={faGoogle} /> Login with Google
+        </SocialButton>
+        <SocialButton bgColor="#4267B2" hoverColor="#3755A6">
+          <Icon icon={faFacebook} /> Login with Facebook
+        </SocialButton>
+        <SocialButton bgColor="#333" hoverColor="#444">
+          <Icon icon={faGithub} /> Login with GitHub
+        </SocialButton>
+        <Link href="/signup">Don't have an account? Sign up</Link>
+      </FormWrapper>
     </Container>
   );
 };

@@ -16,7 +16,7 @@ function App() {
                 <Route path="/main" element={<Main />} />
                 <Route path="/messages" element={<Messages />} />
                 <Route path="/weather" element={<Weather />} /> {/* Add Weather route */}
-                <Route path="/" element={<LoginPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
             </Routes>
         </Router>
