@@ -2,13 +2,14 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import MessageViewSet, wish_me, take_command, get_weather, search_wikipedia, tell_joke
+from .views import  wish_me, take_command, get_weather, search_wikipedia, tell_joke,home
 
-router = DefaultRouter()
-router.register(r'messages', MessageViewSet)
+# router = DefaultRouter()
+# router.register(r'messages', MessageViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', home, name='home'),
+
     path('wish/', wish_me, name='wish_me'),
     path('command/', take_command, name='take_command'),
     path('weather/<str:location>/', get_weather, name='get_weather'),

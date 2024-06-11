@@ -1,5 +1,5 @@
 # backend/api/views.py
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import pyttsx3
 import speech_recognition as sr
 import datetime
@@ -18,10 +18,12 @@ engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
 
+
+def home(request):
+    return HttpResponse("heeloo world")
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
-
 def wish_me(request):
     hour = datetime.datetime.now().hour
     if 0 <= hour < 12:
@@ -30,7 +32,17 @@ def wish_me(request):
         greeting = "Good Afternoon!"
     else:
         greeting = "Good Evening!"
-    speak(greeting)
+    
+    # Initialize the TTS engine
+    engine = pyttsx3.init()
+    
+    # Speak the greeting
+    engine.say(greeting)
+    engine.runAndWait()
+    
+    # Stop the TTS engine
+    engine.stop()
+    
     return JsonResponse({'message': greeting})
 
 def take_command(request):
@@ -78,7 +90,17 @@ def tell_joke(request):
              "Why did the scarecrow win an award? Because he was outstanding in his field!",
              "Parallel lines have so much in common. It's a shame they'll never meet."]
     joke = random.choice(jokes)
-    speak(joke)
+    
+    # Initialize the TTS engine
+    engine = pyttsx3.init()
+    
+    # Speak the joke
+    engine.say(joke)
+    engine.runAndWait()
+    
+    # Stop the TTS engine
+    engine.stop()
+    
     return JsonResponse({'joke': joke})
 
 class WeatherView(View):
