@@ -41,7 +41,7 @@ const Main = ({ data }) => {
             Pulse Dashboard
           </Typography>
           <Box ml="auto">
-          <Link to="/login" className="no-underline-link">
+          <Link to="/login">
             <Button color="inherit">Login</Button>
           </Link>
           </Box>
