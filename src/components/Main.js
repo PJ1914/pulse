@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Container, Grid, Paper, Box, Button, CssBaseline } from '@mui/material';
+import { AppBar, Toolbar, Typography, Container, Box, Button, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
