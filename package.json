@@ -34,8 +34,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "postbuild": "rm -rf build/static/media/vecteezy_purple-and-white-3d-technology-element-artificial_27989661.mp4",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build --exclude src/assets/vecteezy_purple-and-white-3d-technology-element-artificial_27989661.mp4"
+    "deploy": "gh-pages -d build"
     
   },
   "eslintConfig": {
