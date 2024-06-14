@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Container, Box, Button, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
@@ -40,7 +41,9 @@ const Main = ({ data }) => {
             Pulse Dashboard
           </Typography>
           <Box ml="auto">
-            <Button color="inherit" href="/login">Login</Button>
+          <Link to="/login" className="no-underline-link">
+            <Button color="inherit">Login</Button>
+          </Link>
           </Box>
         </Toolbar>
       </AppBar>
@@ -132,15 +135,16 @@ const Main = ({ data }) => {
           <Typography variant="h5" component="h2" gutterBottom>
             Pulse AI Chat Bot
           </Typography>
+          <Link to="/messages" style={{textDecoration: "none"}}>
           <Button
             variant="contained"
             color="primary"
             startIcon={<ChatBubbleIcon />}
             style={{ marginTop: '10px' }}
-            href='/messages'
           >
             Open Chat Bot
           </Button>
+          </Link>
         </Box>
 
         {/* Pulse AI Intelligence */}
