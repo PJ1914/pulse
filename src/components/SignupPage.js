@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { auth } from '../config/config';
 import { createUserWithEmailAndPassword ,
-  GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
+GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
 
