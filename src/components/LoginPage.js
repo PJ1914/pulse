@@ -95,7 +95,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      nav('/'); // Redirect to home page after login
+      nav('/main'); // Redirect to home page after login
     } catch (error) {
       console.error('Error logging in with email and password', error);
     }
@@ -105,7 +105,7 @@ const LoginPage = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      nav('/'); // Redirect to home page after login
+      nav('/main'); // Redirect to home page after login
       
     } catch (error) {
       console.error('Error logging in with Google', error);
