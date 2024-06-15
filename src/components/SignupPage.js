@@ -1,6 +1,5 @@
-// src/components/SignupPage.js
-
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -71,8 +70,8 @@ const Icon = styled(FontAwesomeIcon)`
   margin-right: 8px;
 `;
 
-const Link = styled.a`
-  display: block;
+const StyledLink = styled(Link)`
+  display: block; /* Ensure block-level display for centering */
   text-align: center;
   color: #2563EB;
   text-decoration: none;
@@ -84,6 +83,7 @@ const Link = styled.a`
   }
 `;
 
+// The SignupPage component
 const SignupPage = () => {
   return (
     <Container>
@@ -104,7 +104,7 @@ const SignupPage = () => {
         <SocialButton bgColor="#333" hoverColor="#444">
           <Icon icon={faGithub} /> Sign up with GitHub
         </SocialButton>
-        <Link href="/login">Already have an account? Login</Link>
+        <StyledLink to='/login'>Already have an account? Login</StyledLink>
       </FormWrapper>
     </Container>
   );
