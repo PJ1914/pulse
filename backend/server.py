@@ -6,7 +6,7 @@ from flask import Flask,request,jsonify
 load_dotenv()
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 # The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel(os.environ['MODEL'])
 
 app = Flask(__name__)
 CORS(app=app,origins=os.environ['ORIGIN'])
