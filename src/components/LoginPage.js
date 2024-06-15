@@ -1,9 +1,11 @@
-import React from 'react';
+import {React,useState} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { auth } from '../config/config';
+import { signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
-
+import { useNavigate } from 'react-router-dom';
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -85,17 +87,50 @@ const StyledLink = styled(Link)`
 
 // The LoginPage component
 const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const nav =useNavigate()
+ 
+  const handleEmailLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      nav('/'); // Redirect to home page after login
+    } catch (error) {
+      console.error('Error logging in with email and password', error);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      nav('/'); // Redirect to home page after login
+      
+    } catch (error) {
+      console.error('Error logging in with Google', error);
+    }
+  };
+
+
+
   return (
     <Container>
       <FormWrapper>
         <Title>Login</Title>
-        <form>
-          <Input type="text" placeholder="Email" required />
-          <Input type="password" placeholder="Password" required />
+        <form onSubmit={handleEmailLogin}>
+          <Input type="text" placeholder="Email" 
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)}
+          required />
+          <Input type="password" placeholder="Password" 
+          value={password}   
+          onChange={(e) => setPassword(e.target.value)} 
+          required />
           <Button type="submit">Login</Button>
         </form>
-        <SocialButton bgColor="#DB4437" hoverColor="#C1351B">
-          <Icon icon={faGoogle} /> Login with Google
+        <SocialButton bgColor="#DB4437" hoverColor="#C1351B" onClick={handleGoogleLogin}>
+          <Icon icon={faGoogle}  /> Login with Google
         </SocialButton>
         <SocialButton bgColor="#4267B2" hoverColor="#3755A6">
           <Icon icon={faFacebook} /> Login with Facebook
