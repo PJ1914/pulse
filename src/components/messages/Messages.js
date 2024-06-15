@@ -49,6 +49,9 @@ import { auth, db } from '../../config/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { addDoc, serverTimestamp, collection, onSnapshot, query, orderBy, where } from 'firebase/firestore';
 
+
+// Should prettify markdown response
+
 const messagesCollection = collection(db, 'messages');
 
 export default function Messages() {
