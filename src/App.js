@@ -8,6 +8,7 @@ import Weather from './components/Weather';
 import LoginPage from './components/LoginPage';
 import SignupPage from './components/SignupPage';
 import VoiceAsist from './components/AI voice/VoiceAsist'; 
+import ItemList from './components/ItemList';
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/voice" element={<VoiceAsist />} />
+                <Route path="/iteam" element={<ItemList />} />
             </Routes>
         </Router>
     );
