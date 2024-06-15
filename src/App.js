@@ -8,7 +8,7 @@ import Weather from './components/Weather';
 import LoginPage from './components/LoginPage';
 import SignupPage from './components/SignupPage';
 import VoiceAsist from './components/AI voice/VoiceAsist'; 
-import ItemList from './components/ItemList';
+import ItemList from './services/ItemList';
 
 function App() {
     return (
