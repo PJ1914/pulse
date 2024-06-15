@@ -9,7 +9,7 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 app = Flask(__name__)
-CORS(app=app,origins='http://localhost:3000')
+CORS(app=app,origins=os.environ['ORIGIN'])
 
 @app.route('/')
 def test():
@@ -27,4 +27,4 @@ def gem():
         return jsonify({'error':f'error at line {e.__traceback__.tb_lineno}: {e}'}),400
 
 if __name__=='__main__':
-    app.run('localhost',8080,debug=True)
+    app.run('localhost',os.environ['PORT'],debug=True)
