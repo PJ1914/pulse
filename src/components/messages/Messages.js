@@ -165,14 +165,6 @@ export default function Messages() {
           </button>
         </header>
         <div className="messages-container">
-          {/*{messages.map((message, index) => (
-            <div
-              key={index}
-              className={`message ${message.role === 'user' ? 'message-user' : 'message-bot'}`}
-            >
-              {message.content}
-            </div>
-          ))}*/}
           {messages.map((message, index) => (
               <div
                 key={index}

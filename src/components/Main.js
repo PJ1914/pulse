@@ -4,6 +4,8 @@ import { AppBar, Toolbar, Typography, Container, Box, Button, CssBaseline } from
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
+import { auth } from '../config/config';
+import { signOut } from 'firebase/auth';
 import './Main.css';
 
 const darkTheme = createTheme({
@@ -31,6 +33,16 @@ const darkTheme = createTheme({
 });
 
 const Main = ({ data }) => {
+
+  const logOut = async () => {
+    try {
+      await signOut(auth);
+      console.log("Sign-out successful.");
+    } catch (error) {
+      console.error("An error happened during sign-out:", error);
+    }
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -41,9 +53,10 @@ const Main = ({ data }) => {
             Pulse Dashboard
           </Typography>
           <Box ml="auto">
-          <Link to="/login">
+
+          {!auth.currentUser?<Link to="/login">
             <Button color="inherit">Login</Button>
-          </Link>
+          </Link>:<Button color="inherit" onClick={logOut}>Log out</Button>}
           </Box>
         </Toolbar>
       </AppBar>

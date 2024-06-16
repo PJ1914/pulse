@@ -9,6 +9,9 @@ import LoginPage from './components/LoginPage';
 import SignupPage from './components/SignupPage';
 import VoiceAsist from './components/AI voice/VoiceAsist'; 
 import ItemList from './services/ItemList';
+import ProtectedRoute from './ProtectedRoute';
+// to set sessions of users in page
+
 
 function App() {
     return (
@@ -16,11 +19,15 @@ function App() {
             <Routes>
                 <Route path="/pulseai" element={<PulseAni />} />
                 <Route path="/main" element={<Main />} />
-                <Route path="/messages" element={<Messages />} />
+                <Route path="/messages" element={<ProtectedRoute>
+                        <Messages/>
+                    </ProtectedRoute>} />
                 <Route path="/weather" element={<Weather />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
-                <Route path="/voice" element={<VoiceAsist />} />
+                <Route path="/voice" element={<ProtectedRoute>
+                        <VoiceAsist />
+                    </ProtectedRoute>} />
                 <Route path="/iteam" element={<ItemList />} />
             </Routes>
         </Router>
