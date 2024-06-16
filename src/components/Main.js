@@ -1,4 +1,4 @@
-import React from 'react';
+import {React,useState,useEffect} from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Container, Box, Button, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -6,6 +6,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { auth } from '../config/config';
 import { signOut } from 'firebase/auth';
+import axios from 'axios';
 import './Main.css';
 
 const darkTheme = createTheme({
@@ -43,7 +44,40 @@ const Main = ({ data }) => {
       console.error("An error happened during sign-out:", error);
     }
   };
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const accessToken = urlParams.get('token');
+
+    if (accessToken) {
+      setToken(accessToken);
+      // Fetch user information using the token
+      axios.get('https://api.github.com/user', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }).then(response => {
+        setUser(response.data);
+      }).catch(error => {
+        console.error('Error fetching user:', error);
+      });
+    }
+  }, []);
+
+  
+  
+
+  const handleGitLogout = () => {
+    axios.get('http://localhost:8080/logout')
+      .then(() => {
+        setUser(null);
+      })
+      .catch(error => {
+        console.error('Error logging out:', error);
+      });
+  };
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -55,9 +89,9 @@ const Main = ({ data }) => {
           </Typography>
           <Box ml="auto">
 
-          {!auth.currentUser?<Link to="/login">
+          {!(auth.currentUser || user)?<Link to="/login">
             <Button color="inherit">Login</Button>
-          </Link>:<Button color="inherit" onClick={logOut}>Log out</Button>}
+          </Link>:user?<Button color="inherit" onClick={handleGitLogout}>Log out</Button>:<Button color="inherit" onClick={logOut}>Log out</Button>}
           </Box>
         </Toolbar>
       </AppBar>

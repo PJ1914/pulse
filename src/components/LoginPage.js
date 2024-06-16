@@ -1,4 +1,4 @@
-import {React,useState} from 'react';
+import {React,useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { auth } from '../config/config';
@@ -112,6 +112,13 @@ const LoginPage = () => {
     }
   };
 
+  
+
+  const handleGitLogin = () => {
+    window.location.href = 'http://localhost:8080/login';
+  };
+
+  
 
 
   return (
@@ -135,7 +142,7 @@ const LoginPage = () => {
         <SocialButton bgColor="#4267B2" hoverColor="#3755A6">
           <Icon icon={faFacebook} /> Login with Facebook
         </SocialButton>
-        <SocialButton bgColor="#333" hoverColor="#444">
+        <SocialButton bgColor="#333" hoverColor="#444" onClick={handleGitLogin}>
           <Icon icon={faGithub} /> Login with GitHub
         </SocialButton>
         <StyledLink to='/signup'>Don't have an account? Sign up</StyledLink> 
