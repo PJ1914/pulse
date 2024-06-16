@@ -48,7 +48,8 @@ import loadingGif from './load-32_256-ezgif.com-resize.gif'; // Adjust import st
 import { auth, db } from '../../config/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { addDoc, serverTimestamp, collection, onSnapshot, query, orderBy, where } from 'firebase/firestore';
-
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // Should prettify markdown response
 
@@ -164,13 +165,27 @@ export default function Messages() {
           </button>
         </header>
         <div className="messages-container">
-          {messages.map((message, index) => (
+          {/*{messages.map((message, index) => (
             <div
               key={index}
               className={`message ${message.role === 'user' ? 'message-user' : 'message-bot'}`}
             >
               {message.content}
             </div>
+          ))}*/}
+          {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`message ${message.role === 'user' ? 'message-user' : 'message-bot'}`}
+              >
+                {message.role === 'bot' ? (
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {message.content}
+                  </ReactMarkdown>
+                ) : (
+                  message.content
+                )}
+              </div>
           ))}
         </div>
         <div className="search">
