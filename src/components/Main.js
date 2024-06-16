@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Container, Box, Button, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
@@ -33,11 +33,12 @@ const darkTheme = createTheme({
 });
 
 const Main = ({ data }) => {
-
+  const nav = useNavigate();
   const logOut = async () => {
     try {
       await signOut(auth);
       console.log("Sign-out successful.");
+      nav('/login')
     } catch (error) {
       console.error("An error happened during sign-out:", error);
     }
