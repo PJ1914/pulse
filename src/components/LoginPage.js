@@ -115,7 +115,7 @@ const LoginPage = () => {
   
 
   const handleGitLogin = () => {
-    window.location.href = 'http://localhost:8080/login';
+    window.location.href = 'http://localhost:8080/login,';
   };
 
   

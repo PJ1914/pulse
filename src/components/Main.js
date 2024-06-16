@@ -70,7 +70,7 @@ const Main = ({ data }) => {
   
 
   const handleGitLogout = () => {
-    axios.get('http://localhost:8080/logout')
+    axios.get('http://localhost:8080/logout,')
       .then(() => {
         setUser(null);
       })
