@@ -152,6 +152,7 @@ const Main = ({ data }) => {
           <Typography variant="h5" component="h2" gutterBottom>
             Pulse AI Intelligence
           </Typography>
+          <Link to="/voice" style={{textDecoration: "none"}}>
           <Button
             variant="contained"
             color="primary"
@@ -160,6 +161,7 @@ const Main = ({ data }) => {
           >
             Explore Intelligence
           </Button>
+          </Link>
         </Box>
       </Container>
 
