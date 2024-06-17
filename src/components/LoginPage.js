@@ -1,8 +1,8 @@
-import {React,useState,useEffect} from 'react';
+import {React,useState,/*useEffect*/} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { auth } from '../config/config';
-import { signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup, GithubAuthProvider, /*EmailAuthProvider*/ } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -112,14 +112,16 @@ const LoginPage = () => {
     }
   };
 
-  
-
-  const handleGitLogin = () => {
-    window.location.href = 'http://localhost:8080/login,';
+  const handleGitLogin = async () => {
+    const provider = new GithubAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      nav('/main'); // Redirect to home page after login
+      
+    } catch (error) {
+      console.error('Error logging in with Github', error);
+    }
   };
-
-  
-
 
   return (
     <Container>
