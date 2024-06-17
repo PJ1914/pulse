@@ -318,3 +318,123 @@ body.dark-mode .textarea::-webkit-scrollbar-thumb {
 body.dark-mode .textarea::-webkit-scrollbar-thumb:hover {
   background-color: #888;
 }
+
+/* Updated CSS for chat-like UI */
+
+/* Container styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header styles */
+.header {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.theme-toggle,
+.settings-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Messages container */
+.messages-container {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.message-user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+}
+
+.message-bot {
+  background-color: #f0f0f0;
+  color: #333;
+  align-self: flex-start;
+}
+
+/* Search bar styles */
+.search {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+}
+
+.textarea-wrapper {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  position: relative;
+}
+
+.textarea {
+  flex-grow: 1;
+  min-height: 40px;
+  max-height: 120px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  resize: none;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.send-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: #0056b3;
+}

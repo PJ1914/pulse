@@ -1,57 +1,18 @@
-// // src/components/Messages.js
-// import React, { useEffect, useState } from 'react';
-// import { getMessages } from '../../services/api';
-
-// const Messages = () => {
-//     const [messages, setMessages] = useState([]);
-
-//     useEffect(() => {
-//         const fetchMessages = async () => {
-//             try {
-//                 const data = await getMessages();
-//                 setMessages(data);
-//             } catch (error) {
-//                 console.error("Error fetching messages", error);
-//             }
-//         };
-
-//         fetchMessages();
-//     }, []);
-
-//     return (
-//         <div>
-//             <h1>Messages</h1>
-//             <ul>
-//                 {messages.map((message) => (
-//                     <li key={message.id}>
-//                         <h2>{message.title}</h2>
-//                         <p>{message.content}</p>
-//                     </li>
-//                 ))}
-//             </ul>
-//         </div>
-//     );
-// };
-
-// export default Messages;
-
 import React, { useState, useRef, useEffect } from 'react';
 import './Messages.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast, ToastContainer } from 'react-toastify';
-import { IoSendSharp } from 'react-icons/io5';
-import { BsSun, BsMoon } from 'react-icons/bs'; // Icons for light and dark mode
+import { IoSendSharp, IoImageOutline, IoSettingsOutline, IoMicOutline } from 'react-icons/io5'; // Add icons for image, settings, microphone
+import { BsSun, BsMoon } from 'react-icons/bs';
 import 'react-toastify/dist/ReactToastify.css';
 
-import loadingGif from './load-32_256-ezgif.com-resize.gif'; // Adjust import statement based on the actual location
+import loadingGif from './load-32_256-ezgif.com-resize.gif';
 import { auth, db } from '../../config/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { addDoc, serverTimestamp, collection, onSnapshot, query, orderBy, where } from 'firebase/firestore';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-
-// Should prettify markdown response
 
 const messagesCollection = collection(db, 'messages');
 
@@ -59,12 +20,11 @@ export default function Messages() {
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light'); // Initialize with saved theme
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const inputRef = useRef(null);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Apply the saved theme on component mount
     document.body.classList.toggle('dark-mode', theme === 'dark');
     localStorage.setItem('theme', theme);
 
@@ -158,35 +118,40 @@ export default function Messages() {
           pauseOnHover
           theme="dark"
         ></ToastContainer>
-        <header>
-          <h1>Pulse AI Chatbot</h1>
-          <button className="theme-toggle" onClick={toggleTheme}>
-            {theme === 'light' ? <BsMoon size={24} /> : <BsSun size={24} />}
+        <header className="header">
+          <div className="header-title">
+            <h1>Pulse AI Chatbot</h1>
+            <button className="theme-toggle" onClick={toggleTheme}>
+              {theme === 'light' ? <BsMoon size={24} /> : <BsSun size={24} />}
+            </button>
+          </div>
+          <button className="settings-toggle">
+            <IoSettingsOutline size={24} />
           </button>
         </header>
         <div className="messages-container">
           {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`message ${message.role === 'user' ? 'message-user' : 'message-bot'}`}
-              >
-                {message.role === 'bot' ? (
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {message.content}
-                  </ReactMarkdown>
-                ) : (
-                  message.content
-                )}
-              </div>
+            <div
+              key={index}
+              className={`message ${message.role === 'user' ? 'message-user' : 'message-bot'}`}
+            >
+              {message.role === 'bot' ? (
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {message.content}
+                </ReactMarkdown>
+              ) : (
+                message.content
+              )}
+            </div>
           ))}
         </div>
         <div className="search">
-          <div className="textarea-container">
+          <div className="textarea-wrapper">
             <textarea
               ref={inputRef}
               className="textarea"
               id="search"
-              placeholder="Hi, I'm Pulse. Ask me anything..."
+              placeholder="Type your message..."
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               onKeyDown={(e) => {
@@ -198,6 +163,10 @@ export default function Messages() {
                 }
               }}
             />
+            <div className="icons">
+              <IoImageOutline size={24} className="icon" />
+              <IoMicOutline size={24} className="icon" />
+            </div>
           </div>
           {loading ? (
             <div className="send-button">
