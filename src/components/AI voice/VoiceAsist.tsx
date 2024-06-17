@@ -1,60 +1,58 @@
-// src/components/voiceasist/Voice.js
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
-const Voice = () => {
-    const containerRef = useRef(null);
+
+import modelPath from '../../assets/realistic room.obj'; 
+
+const Voice: React.FC = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!containerRef.current) return;
 
-        // Make a local copy of the containerRef.current
         const container = containerRef.current;
 
-        // Initialize the scene
+        // Scene, Camera, Renderer
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x000000);
 
-        // Initialize the camera
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
         camera.position.set(0, 1, 5);
 
-        // Initialize the renderer
         const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(container.clientWidth, container.clientHeight);
         container.appendChild(renderer.domElement);
 
-        // Initialize the light
+        // Light
         const light = new THREE.DirectionalLight(0xffffff, 1);
         light.position.set(5, 5, 5).normalize();
         scene.add(light);
 
-        // Load the GLTF model
-        const loader = new GLTFLoader();
-        loader.load('src/components/AI voice/assets/realistic_room.glb', function (gltf) {
-            scene.add(gltf.scene);
-            console.log('Model loaded:', gltf); // Debug log
-        }, undefined, function (error) {
+        // OBJ Loader
+        const loader = new OBJLoader();
+        loader.load(modelPath, (obj) => {
+            scene.add(obj);
+        }, undefined, (error) => {
             console.error('Error loading model:', error);
         });
 
-        // Initialize the orbit controls
+        // Controls
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
 
-        // Handle window resize
+        // Resize handling
         const onResize = () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(container.clientWidth, container.clientHeight);
         };
 
         window.addEventListener('resize', onResize);
 
-        // Animate the scene
+        // Animation loop
         const animate = () => {
             requestAnimationFrame(animate);
             controls.update();
@@ -63,7 +61,7 @@ const Voice = () => {
 
         animate();
 
-        // Clean up on component unmount
+        // Cleanup
         return () => {
             window.removeEventListener('resize', onResize);
             if (container) {
@@ -72,7 +70,7 @@ const Voice = () => {
         };
     }, []);
 
-    return <div ref={containerRef}></div>;
+    return <div ref={containerRef} style={{ width: '100%', height: '100vh' }}></div>;
 };
 
 export default Voice;
