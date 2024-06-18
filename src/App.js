@@ -38,7 +38,7 @@ function App() {
 //     const [data, setData] = useState(null);
 
 //     useEffect(() => {
-//         axios.get('http://127.0.0.1:8000/api/main/')
+//         axios.get('http://127.0.0.1/api/main/')
 //             .then(response => {
 //                 setData(response.data);
 //             })
@@ -54,7 +54,7 @@ function App() {
 //     const [data, setData] = useState(null);
 
 //     useEffect(() => {
-//         axios.get('http://127.0.0.1:8000/api/messages/')
+//         axios.get('http://127.0.0.1/api/messages/')
 //             .then(response => {
 //                 setData(response.data);
 //             })
@@ -72,7 +72,7 @@ function App() {
 
 //     useEffect(() => {
 //         if (location) { // Fetch data only if location is provided
-//             axios.get(`http://127.0.0.1:8000/api/weather/${location}/`)
+//             axios.get(`http://127.0.0.1/api/weather/${location}/`)
 //                 .then(response => {
 //                     setWeatherData(response.data);
 //                 })

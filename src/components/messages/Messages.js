@@ -60,7 +60,7 @@ export default function Messages() {
     ]);
     setLoading(true);
     try {
-      const response = await axios.post(`http://localhost:8080/gemini`, {
+      const response = await axios.post(`http://127.0.0.1/gemini`, {
         message: prompt
       });
       if (response.status === 200) {
