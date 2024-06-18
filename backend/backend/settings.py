@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'your-default-secret-key')
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
 
 # Allowed hosts
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ).split(',')
 
 # Application definition
 INSTALLED_APPS = [
@@ -127,7 +127,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS Configuration
 CORS_ALLOWED_ORIGINS = [
-    origin for origin in os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
+    origin for origin in os.getenv('CORS_ALLOWED_ORIGINS',).split(',')
     if origin.strip() and "://" in origin
 ]
 
