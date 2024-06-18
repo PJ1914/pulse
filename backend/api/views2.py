@@ -4,23 +4,34 @@ from django.http import JsonResponse
 from django.conf import settings
 import os
 from dotenv import load_dotenv
+from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.views import APIView
 
+from rest_framework import status
+from .serializers import GeminiSerializer
 load_dotenv()
 
 
 def index(request):
-    return JsonResponse({'message': 'Hello, world! This is your Django app.'})
+    return Response({'message': 'Hello, world! This is your Django app.'})
 
+class TestView(GenericViewSet):
+    def post(self,request):
+        return Response({"message":"hello world"})
 
-def gemini(request):
-    if request.method == 'POST':
-        try:
-            prompt = request.POST.get('message')
-            model = settings.GEMINI_MODEL  # Access the model from settings or environment
-            response = model.generate_content(prompt)
-            return JsonResponse({'response': response.candidates[0].content.parts[0].text}, status=200)
-        except Exception as e:
-            return JsonResponse({'error': f'Error: {e}'}, status=400)
+class GeminiViewSet(APIView):
+    def post(self, request):
+        serializer = GeminiSerializer(data=request.data)
+        if serializer.is_valid():
+            prompt = serializer.validated_data['message']
+            try:
+                model = "gemini-1.5-flash"
+                response = model.generate_content(prompt)
+                return Response({'response': response.candidates[0].content.parts[0].text}, status=status.HTTP_200_OK)
+            except Exception as e:
+                return JsonResponse({'error': f'Error: {e}'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def main(request):
     # Replace with your logic for handling main route

@@ -16,9 +16,10 @@ urlpatterns = [
     path('wiki/<str:query>/', search_wikipedia, name='search_wikipedia'),
     path('joke/', tell_joke, name='tell_joke'),
     path('', views2.index, name='index'),
-    path('gemini/', views2.gemini, name='gemini'),
+    path('gemini/', views2.GeminiViewSet.as_view(), name='gemini'),
     path('main/', views2.main, name='index'),
     path('login/', views2.login, name='login'),
     path('logout/', views2.logout, name='logout'),
+    path ("test/", views2.TestView.as_view({"post":"post"}))
     # Add more URL patterns as needed
 ]
