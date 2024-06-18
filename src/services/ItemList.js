@@ -5,7 +5,7 @@ const ItemList = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/items/,')
+        axios.get('http://localhost:8080,')
             .then(response => {
                 setItems(response.data);
             })
