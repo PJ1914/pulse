@@ -1,18 +1,14 @@
+// Messages.js
 import React, { useState, useRef, useEffect } from "react";
 import "./Messages.css";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { toast, ToastContainer } from "react-toastify";
 import {
   IoSendSharp,
-  IoImageOutline,
   IoSettingsOutline,
-  IoMicOutline,
-} from "react-icons/io5"; // Add icons for image, settings, microphone
+} from "react-icons/io5";
 import { BsSun, BsMoon } from "react-icons/bs";
 import "react-toastify/dist/ReactToastify.css";
-
-import loadingGif from "./load-32_256-ezgif.com-resize.gif";
 import { auth, db } from "../../config/config";
 import { onAuthStateChanged } from "firebase/auth";
 import {
@@ -26,6 +22,9 @@ import {
 } from "firebase/firestore";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import Gallery from "./Gallery";
+import Mic from "./Mic";
+import ThreeBodyLoader from "./ThreeBodyLoader";
 
 const messagesCollection = collection(db, "messages");
 
@@ -119,6 +118,20 @@ export default function Messages() {
     }
   };
 
+  const handleFileSelect = (file) => {
+    const fileUrl = URL.createObjectURL(file);
+    const fileType = file.type;
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { content: fileUrl, role: "user", type: fileType },
+    ]);
+  };
+
+  const handleVoiceResult = (text) => {
+    setPrompt(text);
+    action();
+  };
+
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
@@ -161,6 +174,14 @@ export default function Messages() {
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {message.content}
                 </ReactMarkdown>
+              ) : message.type ? (
+                message.type.startsWith("image/") ? (
+                  <img src={message.content} alt="User content" />
+                ) : message.type.startsWith("video/") ? (
+                  <video controls src={message.content} />
+                ) : (
+                  <span>{message.content}</span>
+                )
               ) : (
                 message.content
               )}
@@ -186,13 +207,13 @@ export default function Messages() {
               }}
             />
             <div className="icons">
-              <IoImageOutline size={24} className="icon" />
-              <IoMicOutline size={24} className="icon" />
+              <Gallery onFileSelect={handleFileSelect} />
+              <Mic onVoiceResult={handleVoiceResult} />
             </div>
           </div>
           {loading ? (
             <div className="send-button">
-              <img src={loadingGif} alt="loading..." />
+              <ThreeBodyLoader />
             </div>
           ) : (
             <button className="send-button" onClick={action}>
