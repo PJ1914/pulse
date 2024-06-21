@@ -35,7 +35,6 @@ export default function Messages() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const inputRef = useRef(null);
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     document.body.classList.toggle("dark-mode", theme === "dark");
     localStorage.setItem("theme", theme);
@@ -79,7 +78,7 @@ export default function Messages() {
     ]);
     setLoading(true);
     try {
-      const response = await axios.post(`http://127.0.0.1:8000/api/gemini/`, {
+      const response = await axios.post(process.env.REACT_APP_GEMINI_URL, {
         message: prompt,
       });
       if (response.status === 200) {
@@ -103,7 +102,6 @@ export default function Messages() {
           userId: user.uid,
           createdAt: serverTimestamp(),
         });
-
         setLoading(false);
         setPrompt("");
         inputRef.current.value = "";
