@@ -1,5 +1,5 @@
 // Messages.js
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import "./Messages.css";
 import axios from "axios";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
@@ -24,27 +24,26 @@ import Gallery from "./Gallery";
 import Mic from "./Mic";
 import ThreeBodyLoader from "./ThreeBodyLoader";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-const messagesCollection = collection(db, "messages");
 
+// Messages component
 export default function Messages() {
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const inputRef = useRef(null);
   const [user, setUser] = useState(null);
-  const [copy, setCopy] = useState(false);
   const [contentCopyId, setContentCopyId] = useState([]);
+  const inputRef = useRef(null);
+  const messagesContainerRef = useRef(null); 
 
-  const handleCopy = (id, content) => {
+  const handleCopy = useCallback((id, content) => {
     navigator.clipboard.writeText(content);
-    setCopy(true);
-    if (contentCopyId.includes(id)) {
-      setContentCopyId(contentCopyId.filter((item) => item !== id));
-    } else {
-      setContentCopyId([...contentCopyId, id]);
-    }
-  };
+    setContentCopyId((prevCopyIds) =>
+      prevCopyIds.includes(id)
+        ? prevCopyIds.filter((item) => item !== id)
+        : [...prevCopyIds, id]
+    );
+  }, []);
 
   useEffect(() => {
     document.body.classList.toggle("dark-mode", theme === "dark");
@@ -54,86 +53,84 @@ export default function Messages() {
       if (user) {
         setUser(user);
         const messagesQuery = query(
-          messagesCollection,
+          collection(db, "messages"),
           orderBy("createdAt", "asc"),
           where("userId", "==", user.uid)
         );
-        const unsubscribeMessages = onSnapshot(
-          messagesQuery,
-          (querySnapshot) => {
-            const fetchedMessages = [];
-            querySnapshot.forEach((doc) => {
-              fetchedMessages.push({ id: doc.id, ...doc.data() });
-            });
-            setMessages(fetchedMessages);
-          }
-        );
+        const unsubscribeMessages = onSnapshot(messagesQuery, (querySnapshot) => {
+          setMessages(
+            querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+          );
+        });
         return unsubscribeMessages;
       } else {
         setUser(null);
       }
     });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, [theme]);
 
-  const action = async () => {
+  // Effect for auto-scrolling
+  useEffect(() => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  const sendMessage = useCallback(
+    async (messageContent, role = "user") => {
+      if (!user) return;
+      await addDoc(collection(db, "messages"), {
+        content: messageContent,
+        role,
+        userId: user.uid,
+        createdAt: serverTimestamp(),
+      });
+    },
+    [user]
+  );
+
+  const action = useCallback(async () => {
     if (!prompt) {
       toast.error("Enter a prompt");
       return;
     }
 
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { content: prompt, role: "user" },
-    ]);
+    const userMessage = { content: prompt, role: "user" };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
     setLoading(true);
+
     try {
       const response = await axios.post(process.env.REACT_APP_GEMINI_URL, {
         message: prompt,
       });
+
       if (response.status === 200) {
-        const data = response.data;
-        const msg = data.response;
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { content: `${msg}`, role: "bot" },
-        ]);
+        const botMessage = { content: response.data.response, role: "bot" };
+        setMessages((prevMessages) => [...prevMessages, botMessage]);
 
-        await addDoc(messagesCollection, {
-          content: prompt,
-          role: "user",
-          userId: user.uid,
-          createdAt: serverTimestamp(),
-        });
+        await sendMessage(prompt);
+        await sendMessage(botMessage.content, "bot");
 
-        await addDoc(messagesCollection, {
-          content: msg,
-          role: "bot",
-          userId: user.uid,
-          createdAt: serverTimestamp(),
-        });
-        setLoading(false);
         setPrompt("");
         inputRef.current.value = "";
       } else {
         toast.error("INTERNAL SERVER ERROR (500)");
-        setLoading(false);
       }
     } catch (error) {
       console.error("Error occurred:", error);
       toast.error("Error occurred while processing your request");
+    } finally {
       setLoading(false);
     }
-  };
+  }, [prompt, sendMessage]);
 
   const handleFileSelect = (file) => {
     const fileUrl = URL.createObjectURL(file);
     const fileType = file.type;
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { content: fileUrl, role: "user", type: fileType },
-    ]);
+    const userMessage = { content: fileUrl, role: "user", type: fileType };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
   };
 
   const handleVoiceResult = (text) => {
@@ -159,90 +156,145 @@ export default function Messages() {
           draggable
           pauseOnHover
           theme="dark"
-        ></ToastContainer>
-        <header className="header">
-          <div className="header-title">
-            <h1>Pulse AI Chatbot</h1>
-          </div>
-          <button className="settings-toggle">
-            <IoSettingsOutline size={24} />
-          </button>
-        </header>
-        <div className="messages-container">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`message ${
-                message.role === "user" ? "message-user" : "message-bot"
-              }`}
-            >
-              {message.role !== "user" && (
-                <p
-                  className="CopyContent"
-                  onClick={() => handleCopy(index, message.content)}
-                >
-                  {contentCopyId.includes(index) ? (
-                    <CheckBoxIcon />
-                  ) : (
-                    <ContentCopyIcon />
-                  )}
-                </p>
-              )}
-              {message.role === "bot" ? (
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {message.content}
-                </ReactMarkdown>
-              ) : message.type ? (
-                message.type.startsWith("image/") ? (
-                  <img src={message.content} alt="User content" />
-                ) : message.type.startsWith("video/") ? (
-                  <video controls src={message.content} />
-                ) : (
-                  <span>{message.content}</span>
-                )
-              ) : (
-                message.content
-              )}
-            </div>
-          ))}
+        />
+        <Header />
+        <div ref={messagesContainerRef} className="messages-container">
+          <MessageList
+            messages={messages}
+            onCopy={handleCopy}
+            copiedIds={contentCopyId}
+          />
         </div>
-        <div className="search">
-          <div className="textarea-wrapper">
-            <textarea
-              ref={inputRef}
-              className="textarea"
-              id="search"
-              placeholder="Type your message..."
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && e.shiftKey) {
-                  setPrompt((prevPrompt) => prevPrompt + "\n");
-                } else if (e.key === "Enter") {
-                  e.preventDefault();
-                  action();
-                }
-              }}
-            />
-            <div className="icons">
-              <Gallery onFileSelect={handleFileSelect} />
-              <Mic onVoiceResult={handleVoiceResult} />
-            </div>
-          </div>
-          {loading ? (
-            <div className="send-button">
-              <ThreeBodyLoader />
-            </div>
-          ) : (
-            <button className="send-button" onClick={action}>
-              <IoSendSharp />
-            </button>
-          )}
-        </div>
+        <MessageInput
+          prompt={prompt}
+          setPrompt={setPrompt}
+          loading={loading}
+          inputRef={inputRef}
+          onSend={action}
+          onFileSelect={handleFileSelect}
+          onVoiceResult={handleVoiceResult}
+        />
       </div>
-      <button className=" ModeCard" onClick={toggleTheme}>
-        {theme === "light" ? <BsMoon size={24} /> : <BsSun size={24} />}
-      </button>
+      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
     </>
   );
 }
+
+// Header component
+const Header = () => (
+  <header className="header">
+    <div className="header-title">
+      <h1>Pulse AI Chatbot</h1>
+    </div>
+    <button className="settings-toggle">
+      <IoSettingsOutline size={24} />
+    </button>
+  </header>
+);
+
+// MessageList component
+const MessageList = ({ messages, onCopy, copiedIds }) => (
+  <>
+    {messages.map((message, index) => (
+      <Message
+        key={index}
+        message={message}
+        isCopied={copiedIds.includes(index)}
+        onCopy={() => onCopy(index, message.content)}
+      />
+    ))}
+  </>
+);
+
+// Message component
+const Message = ({ message, isCopied, onCopy }) => (
+  <div className={`message ${message.role === "user" ? "message-user" : "message-bot"}`}>
+    {message.role !== "user" && (
+      <p className="CopyContent" onClick={onCopy}>
+        {isCopied ? <CheckBoxIcon /> : <ContentCopyIcon />}
+      </p>
+    )}
+    {message.role === "bot" ? (
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+    ) : message.type ? (
+      message.type.startsWith("image/") ? (
+        <img src={message.content} alt="User content" />
+      ) : message.type.startsWith("video/") ? (
+        <video controls src={message.content} />
+      ) : (
+        <span>{message.content}</span>
+      )
+    ) : (
+      message.content
+    )}
+  </div>
+);
+
+const MessageInput = ({
+  prompt,
+  setPrompt,
+  loading,
+  inputRef,
+  onSend,
+  onFileSelect,
+  onVoiceResult,
+}) => {
+  const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    const typingTimeout = setTimeout(() => {
+      setIsTyping(false);
+    }, 300); // Adjust typing delay as needed
+
+    return () => clearTimeout(typingTimeout);
+  }, [prompt]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      onSend();
+    } else if (e.key === "Enter" && e.shiftKey) {
+      setPrompt((prevPrompt) => prevPrompt + "\n");
+    }
+  };
+
+  const handleChange = (e) => {
+    setPrompt(e.target.value);
+    setIsTyping(true);
+  };
+
+  return (
+    <div className="search">
+      <div className="textarea-wrapper">
+        <textarea
+          ref={inputRef}
+          className="textarea"
+          placeholder="Type your message..."
+          value={prompt}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
+        <div className="icons">
+          <Gallery onFileSelect={onFileSelect} />
+          <Mic onVoiceResult={onVoiceResult} />
+        </div>
+      </div>
+      {loading ? (
+        <div className="send-button">
+          <ThreeBodyLoader />
+        </div>
+      ) : (
+        <button className="send-button" onClick={onSend} disabled={!isTyping}>
+          <IoSendSharp />
+        </button>
+      )}
+    </div>
+  );
+};
+
+// ThemeToggle component
+const ThemeToggle = ({ theme, toggleTheme }) => (
+  <button className="ModeCard" onClick={toggleTheme}>
+    {theme === "light" ? <BsMoon size={24} /> : <BsSun size={24} />}
+  </button>
+);
