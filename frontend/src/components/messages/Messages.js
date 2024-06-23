@@ -1,18 +1,12 @@
+// Messages.js
 import React, { useState, useRef, useEffect } from "react";
 import "./Messages.css";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { toast, ToastContainer } from "react-toastify";
-import {
-  IoSendSharp,
-  IoImageOutline,
-  IoSettingsOutline,
-  IoMicOutline,
-} from "react-icons/io5"; // Add icons for image, settings, microphone
+import { IoSendSharp, IoSettingsOutline } from "react-icons/io5";
 import { BsSun, BsMoon } from "react-icons/bs";
 import "react-toastify/dist/ReactToastify.css";
-
-import loadingGif from "./load-32_256-ezgif.com-resize.gif";
 import { auth, db } from "../../config/config";
 import { onAuthStateChanged } from "firebase/auth";
 import {
@@ -26,7 +20,10 @@ import {
 } from "firebase/firestore";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
+import Gallery from "./Gallery";
+import Mic from "./Mic";
+import ThreeBodyLoader from "./ThreeBodyLoader";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 const messagesCollection = collection(db, "messages");
 
 export default function Messages() {
@@ -36,6 +33,18 @@ export default function Messages() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const inputRef = useRef(null);
   const [user, setUser] = useState(null);
+  const [copy, setCopy] = useState(false);
+  const [contentCopyId, setContentCopyId] = useState([]);
+
+  const handleCopy = (id, content) => {
+    navigator.clipboard.writeText(content);
+    setCopy(true);
+    if (contentCopyId.includes(id)) {
+      setContentCopyId(contentCopyId.filter((item) => item !== id));
+    } else {
+      setContentCopyId([...contentCopyId, id]);
+    }
+  };
 
   useEffect(() => {
     document.body.classList.toggle("dark-mode", theme === "dark");
@@ -119,6 +128,20 @@ export default function Messages() {
     }
   };
 
+  const handleFileSelect = (file) => {
+    const fileUrl = URL.createObjectURL(file);
+    const fileType = file.type;
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { content: fileUrl, role: "user", type: fileType },
+    ]);
+  };
+
+  const handleVoiceResult = (text) => {
+    setPrompt(text);
+    action();
+  };
+
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
@@ -141,9 +164,6 @@ export default function Messages() {
         <header className="header">
           <div className="header-title">
             <h1>Pulse AI Chatbot</h1>
-            <button className="theme-toggle" onClick={toggleTheme}>
-              {theme === "light" ? <BsMoon size={24} /> : <BsSun size={24} />}
-            </button>
           </div>
           <button className="settings-toggle">
             <IoSettingsOutline size={24} />
@@ -157,10 +177,30 @@ export default function Messages() {
                 message.role === "user" ? "message-user" : "message-bot"
               }`}
             >
+              {message.role !== "user" && (
+                <p
+                  className="CopyContent"
+                  onClick={() => handleCopy(index, message.content)}
+                >
+                  {contentCopyId.includes(index) ? (
+                    <CheckBoxIcon />
+                  ) : (
+                    <ContentCopyIcon />
+                  )}
+                </p>
+              )}
               {message.role === "bot" ? (
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {message.content}
                 </ReactMarkdown>
+              ) : message.type ? (
+                message.type.startsWith("image/") ? (
+                  <img src={message.content} alt="User content" />
+                ) : message.type.startsWith("video/") ? (
+                  <video controls src={message.content} />
+                ) : (
+                  <span>{message.content}</span>
+                )
               ) : (
                 message.content
               )}
@@ -186,13 +226,13 @@ export default function Messages() {
               }}
             />
             <div className="icons">
-              <IoImageOutline size={24} className="icon" />
-              <IoMicOutline size={24} className="icon" />
+              <Gallery onFileSelect={handleFileSelect} />
+              <Mic onVoiceResult={handleVoiceResult} />
             </div>
           </div>
           {loading ? (
             <div className="send-button">
-              <img src={loadingGif} alt="loading..." />
+              <ThreeBodyLoader />
             </div>
           ) : (
             <button className="send-button" onClick={action}>
@@ -201,6 +241,9 @@ export default function Messages() {
           )}
         </div>
       </div>
+      <button className=" ModeCard" onClick={toggleTheme}>
+        {theme === "light" ? <BsMoon size={24} /> : <BsSun size={24} />}
+      </button>
     </>
   );
 }

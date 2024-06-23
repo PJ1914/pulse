@@ -1,6 +1,6 @@
 # api/views2.py
 from django.shortcuts import redirect
-from django.http import JsonResponse
+from django.http import HttpResponse
 from django.conf import settings
 import os
 from dotenv import load_dotenv
@@ -15,7 +15,7 @@ load_dotenv()
 
 
 def index(request):
-    return Response({'message': 'Hello, world! This is your Django app.'})
+    return HttpResponse({'message': 'Hello, world! This is your Django app.'})
 
 class TestView(GenericViewSet):
     def post(self,request):
@@ -33,17 +33,17 @@ class GeminiViewSet(APIView):
                 response = chat.send_message(prompt)
                 return Response({'response': response.text}, status=status.HTTP_200_OK)
             except Exception as e:
-                return JsonResponse({'error': f'Error: {e}'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'error': f'Error: {e}'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def main(request):
     # Replace with your logic for handling main route
-    return JsonResponse({'message': 'Main route'})
+    return HttpResponse({'message': 'Main route'})
 
 def login(request):
     # Replace with your logic for handling login route
-    return JsonResponse({'message': 'Login route'})
+    return HttpResponse({'message': 'Login route'})
 
 def logout(request):
     # Replace with your logic for handling logout route
-    return JsonResponse({'message': 'Logout route'})
+    return HttpResponse({'message': 'Logout route'})

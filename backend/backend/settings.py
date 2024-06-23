@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     # Your apps
-    'api',  # Replace 'api' with your actual app name
+    'api', # Replace 'api' with your actual app name
 ]
 
 MIDDLEWARE = [
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend/build')],  # React build directory
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/build')], # React build directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,8 +128,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS Configuration
 # CORS_ALLOWED_ORIGINS = [
-#     origin for origin in os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
-#     if origin.strip() and "://" in origin
+# origin for origin in os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
+# if origin.strip() and "://" in origin
 # ]
 
 # Ensure Django finds templates in the React build directory
@@ -143,6 +143,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:5173",
     "http://localhost:3000",
     "http://127.0.0.1:8000",
+    "https://pulsebackend-production.up.railway",
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",  
