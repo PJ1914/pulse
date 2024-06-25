@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './PulseAni.css';
-// import videoBackground from '../assets/vecteezy_purple-and-white-3d-technology-element-artificial_27989661.mp4';
+// import videoBackground from '';
 
 const PulseAni = () => {
     return (
