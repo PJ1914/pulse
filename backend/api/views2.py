@@ -39,7 +39,34 @@ class GeminiViewSet(APIView):
             except Exception as e:
                 print(f'At line {e.__traceback__.tb_lineno}:{e.args[0]}')
                 return Response({'error': f'Error: {e.args}'}, status=status.HTTP_400_BAD_REQUEST)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+#should try to keep track of history
+
+# class GeminiViewSet(APIView):
+#     def post(self, request):
+#         serializer = GeminiSerializer(data=request.data)
+#         if serializer.is_valid():
+#             prompt = serializer.validated_data['prompt']
+#             history = serializer.validated_data.get('history', [])
+            
+#             try:
+#                 model = genai.GenerativeModel("gemini-pro")
+#                 chat = model.start_chat()
+                
+#                 # Send the entire conversation history to the model
+#                 for message in history:
+#                     chat.send_message(message)
+                    
+#                 response = chat.send_message(prompt)
+                
+#                 return Response({'response': response.text}, status=status.HTTP_200_OK)
+#             except Exception as e:
+#                 return Response({'error': f'Error: {e.args}'}, status=status.HTTP_400_BAD_REQUEST)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 def main(request):
     # Replace with your logic for handling main route

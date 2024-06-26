@@ -126,6 +126,48 @@ export default function Messages() {
     }
   }, [prompt, sendMessage]);
 
+
+  //should try to keep track of history
+  // const action = useCallback(async () => {
+  //   if (!prompt) {
+  //     toast.error("Enter a prompt");
+  //     return;
+  //   }
+  
+  //   const userMessage = { content: prompt, role: "user" };
+  //   setMessages((prevMessages) => [...prevMessages, userMessage]);
+  //   setLoading(true);
+  
+  //   try {
+  //     // Fetch previous messages from the state
+  //     const previousMessages = messages.map(message => message.content);
+  
+  //     const response = await axios.post(process.env.REACT_APP_GEMINI_URL, {
+  //       prompt: prompt,
+  //       history: previousMessages,  // Send the entire conversation history
+  //     });
+  
+  //     if (response.status === 200) {
+  //       const botMessage = { content: response.data.response, role: "bot" };
+  //       setMessages((prevMessages) => [...prevMessages, botMessage]);
+  
+  //       await sendMessage(prompt);
+  //       await sendMessage(botMessage.content, "bot");
+  
+  //       setPrompt("");
+  //       inputRef.current.value = "";
+  //     } else {
+  //       toast.error("INTERNAL SERVER ERROR (500)");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error occurred:", error.message);
+  //     toast.error("Error occurred while processing your request");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, [prompt, sendMessage, messages]);
+  
+
   const handleFileSelect = (file) => {
     const fileUrl = URL.createObjectURL(file);
     const fileType = file.type;
