@@ -119,7 +119,7 @@ export default function Messages() {
         toast.error("INTERNAL SERVER ERROR (500)");
       }
     } catch (error) {
-      console.error("Error occurred:", error);
+      console.error("Error occurred:", error.message);
       toast.error("Error occurred while processing your request");
     } finally {
       setLoading(false);

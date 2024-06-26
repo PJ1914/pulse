@@ -17,10 +17,11 @@ load_dotenv()
 def index(request):
     return HttpResponse({'message': 'Hello, world! This is your Django app.'})
 
+test_key ='AIzaSyDGwSA4vpgACT1DzT7LBsuXryx5U3zNmGY'
 class TestView(GenericViewSet):
     def post(self,request):
         return Response({"message":"hello world"})
-genai.configure(api_key="AIzaSyBOWhn1GNAaSK4gB0gOseCAhCdbhuuDtyc")
+genai.configure(api_key=test_key)
 
 class GeminiViewSet(APIView):
     def post(self, request):
@@ -28,13 +29,17 @@ class GeminiViewSet(APIView):
         if serializer.is_valid():
             prompt = serializer.validated_data['message']
             try:
+                print('This route executed')
                 model = genai.GenerativeModel("gemini-pro")
+                print('This route executed 1')
                 chat = model.start_chat()
                 response = chat.send_message(prompt)
+                # print("This should be the response actually: ",response.text)
                 return Response({'response': response.text}, status=status.HTTP_200_OK)
             except Exception as e:
-                return Response({'error': f'Error: {e}'}, status=status.HTTP_400_BAD_REQUEST)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                print(f'At line {e.__traceback__.tb_lineno}:{e.args[0]}')
+                return Response({'error': f'Error: {e.args}'}, status=status.HTTP_400_BAD_REQUEST)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def main(request):
     # Replace with your logic for handling main route
@@ -47,3 +52,4 @@ def login(request):
 def logout(request):
     # Replace with your logic for handling logout route
     return HttpResponse({'message': 'Logout route'})
+
