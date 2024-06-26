@@ -82,11 +82,16 @@ const Main = ({ data }) => {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       {/* Header */}
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div">
-            Pulse Dashboard
-          </Typography>
+      <div className='mainFlex'>
+      <AppBar position="sticky" sx={{ zIndex: 1201, padding: '10px' }}>
+      
+        <Toolbar sx={{padding: 0.5}}>
+          <div className='logoDesign'>
+            <img src={logo} alt="logo" />
+            <Typography variant="h6" component="div" align="center" >
+              Pulse Dashboard
+            </Typography>
+          </div>
           <Box ml="auto">
 
           {!(auth.currentUser || user)?<Link to="/login">
@@ -96,90 +101,85 @@ const Main = ({ data }) => {
         </Toolbar>
       </AppBar>
 
-      <Container>
-        {/* Main Content */}
-      <Box my={4} textAlign="center">
-        <Typography variant="h4" component="h1" gutterBottom>
-          Welcome to Pulse AI
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Experience the next wave of technology with Pulse AI. Our innovative platform harnesses the power of artificial intelligence to bring you intuitive, intelligent solutions that simplify your daily life. From real-time insights to personalized AI assistance, Pulse AI transforms the way you interact with technology.
-        </Typography>
-      </Box>
+    <div class="contain">
+    
+    <div class="box">
+      <h1 class="typography">Welcome to Pulse AI</h1>
+      <div className="imgFlex">
+        <div>
+          <p>Experience the next wave of technology with Pulse AI. Our innovative platform harnesses the power of artificial intelligence to bring you intuitive, intelligent solutions that simplify your daily life. From real-time insights to personalized AI assistance, Pulse AI transforms the way you interact with technology.</p>
+        </div>
+        <img src={welcome} alt="welcome" id="wel"/>
+      </div>
+      
+    </div>
 
-      {/* About Pulse AI */}
-      <Box my={4} textAlign="center">
-        <Typography variant="h5" component="h2" gutterBottom>
-          About Pulse AI
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Pulse AI was created by Pranay Jumbarthi, a passionate full-stack developer and lifelong learner. His vision was to create a platform where AI could seamlessly blend with everyday tasks to make life easier and more productive.
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Our Mission: At Pulse AI, we aim to bring AI technology to everyone. We believe that artificial intelligence should be accessible, easy to use, and tailored to your needs. Our goal is to integrate AI into your daily routine, enhancing productivity and creativity with every interaction.
-        </Typography>
-      </Box>
+    
+    <div class="box">
+      <h2 class="typography">About Pulse AI</h2>
+      <div className="imgFlex">
+        <div>
+        <p>Pulse AI was created by Pranay Jumbarthi, a passionate full-stack developer and lifelong learner. His vision was to create a platform where AI could seamlessly blend with everyday tasks to make life easier and more productive.</p>
+        <p>Our Mission: At Pulse AI, we aim to bring AI technology to everyone. We believe that artificial intelligence should be accessible, easy to use, and tailored to your needs. Our goal is to integrate AI into your daily routine, enhancing productivity and creativity with every interaction.</p>
+        </div>
+        <img src={about} alt="about" />
+      </div>
+      
+    </div>
 
-      {/* Meet the Team */}
-      <Box my={4} textAlign="center">
-        <Typography variant="h5" component="h2" gutterBottom>
-          Meet the Team
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Pranay Jumbarthi: The mastermind behind Pulse AI, Pranay is a full-stack developer with a love for learning and innovation. His expertise drives the platform's unique blend of technology and usability.
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Vishwa: A talented full-stack developer, Vishwa ensures that Pulse AI delivers a seamless user experience. His skills in both frontend and backend development make him a versatile member of the team.
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Tarik Ali: Our backend expert, Tarik excels at solving complex problems and streamlining data management. His contributions have been crucial in overcoming the challenges of AI integration.
-        </Typography>
-        <Typography variant="body1">
-          Durga Prasad: Another skilled full-stack developer, Durga brings his technical prowess to the team, helping to build a robust and scalable platform that stands the test of time.
-        </Typography>
-      </Box>
+    
+    <div class="box">
+      <h2 class="typography">Meet the Team</h2>
+      <div className="imgFlex">
+        <div>
+          <p>Pranay Jumbarthi: The mastermind behind Pulse AI, Pranay is a full-stack developer with a love for learning and innovation. His expertise drives the platform's unique blend of technology and usability.</p>
+          <p>Vishwa: A talented full-stack developer, Vishwa ensures that Pulse AI delivers a seamless user experience. His skills in both frontend and backend development make him a versatile member of the team.</p>
+          <p>Tarik Ali: Our backend expert, Tarik excels at solving complex problems and streamlining data management. His contributions have been crucial in overcoming the challenges of AI integration.</p>
+          <p>Durga Prasad: Another skilled full-stack developer, Durga brings his technical prowess to the team, helping to build a robust and scalable platform that stands the test of time.</p>
+        </div>
+        <img src={meet} alt="meeting" />
+      </div>
 
-      {/* What Pulse AI Can Do */}
-      <Box my={4} textAlign="center">
-        <Typography variant="h5" component="h2" gutterBottom>
-          What Pulse AI Can Do
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Intelligent Features:
-        </Typography>
-        <Typography variant="body1">
-          - AI Chatbot: Engage with our AI chatbot for real-time answers, assistance, and information. It's like having a personal assistant at your fingertips.
-        </Typography>
-        <Typography variant="body1">
-          - Custom Widgets: Tailor your Pulse AI dashboard with widgets that suit your needs, from weather updates to news feeds and more.
-        </Typography>
-        <Typography variant="body1">
-          - Easy Integration: Seamlessly connect Pulse AI with your existing systems and platforms for a cohesive, unified experience.
-        </Typography>
-      </Box>
+    </div>
 
-      {/* Discover Pulse AI Intelligence */}
-      <Box my={4} textAlign="center">
-        <Typography variant="h5" component="h2" gutterBottom>
-          Discover Pulse AI Intelligence
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Dive into Pulse AI Intelligence for advanced data analysis and smart technology solutions. Personalize your experience with interactive buttons and icons, making it easy to get exactly what you need from the platform.
-        </Typography>
-      </Box>
+            
+    <div class="box">
+      <h2 class="typography">What Pulse AI Can Do</h2>
 
-      {/* Learn More About Us */}
-      <Box my={4} textAlign="center">
-        <Typography variant="h5" component="h2" gutterBottom>
-          Learn More About Us
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Scroll down to explore the technology behind Pulse AI and meet the team making it happen. Along the way, you'll find our AI chatbot ready to assist you and a deeper look into Pulse AI Intelligence—where innovation and interaction come together.
-        </Typography>
-      </Box>
+      <p>Intelligent Features:</p>
+      <ul style={{"list-style": "none", "padding": 0}}>
+        <li>AI Chatbot: Engage with our AI chatbot for real-time answers, assistance, and information. It's like having a personal assistant at your fingertips.</li>
+        <li>Custom Widgets: Tailor your Pulse AI dashboard with widgets that suit your needs, from weather updates to news feeds and more.</li>
+        <li>Easy Integration: Seamlessly connect Pulse AI with your existing systems and platforms for a cohesive, unified experience.</li>
+      </ul>
+    </div>
 
-        {/* Pulse AI Chat Bot */}
-        <Box my={4} textAlign="center">
+    
+    <div class="box">
+      <h2 class="typography">Discover Pulse AI Intelligence</h2>
+      <div className="imgFlex">
+        <div>
+          <p>Dive into Pulse AI Intelligence for advanced data analysis and smart technology solutions. Personalize your experience with interactive buttons and icons, making it easy to get exactly what you need from the platform.</p>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <div class="box">
+      <h2 class="typography">Learn More About Us</h2>
+      <div className="imgFlex">
+        <div>
+        <p>Scroll down to explore the technology behind Pulse AI and meet the team making it happen. Along the way, you'll find our AI chatbot ready to assist you and a deeper look into Pulse AI Intelligence—where innovation and interaction come together.</p>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div>
+      {/* Pulse AI Chat Bot */}
+        
+    <Box my={4} textAlign="center">
           <Typography variant="h5" component="h2" gutterBottom>
             Pulse AI Chat Bot
           </Typography>
@@ -211,7 +211,7 @@ const Main = ({ data }) => {
           </Button>
           </Link>
         </Box>
-      </Container>
+
 
       {/* Footer */}
       <Box mt={5} py={3} bgcolor="background.paper" textAlign="center">
@@ -219,7 +219,16 @@ const Main = ({ data }) => {
           © 2024 Pulse. All rights reserved.
         </Typography>
       </Box>
+    </div>
+
+     </div>  
+
+    
+
+     </div>
+        
     </ThemeProvider>
+ 
   );
 };
 
