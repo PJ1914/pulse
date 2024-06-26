@@ -6,6 +6,10 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { auth } from '../config/config';
 import { signOut } from 'firebase/auth';
+import logo from '../assets/pulse_logo.png';
+import welcome from '../assets/welcome.png';
+import meet from '../assets/meet my team.png';
+import about from '../assets/About Pulse.png';
 import axios from 'axios';
 import './Main.css';
 
