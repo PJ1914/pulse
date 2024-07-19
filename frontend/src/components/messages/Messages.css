@@ -120,9 +120,6 @@ button[type="submit"]:hover {
 .search button:hover {
   background-color: #0056b3;
 }
-.message-bot {
-  background-color: #1c1c1c !important;
-}
 
 /* Messages */
 .messages-container {

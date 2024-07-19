@@ -1,2 +1,111 @@
+.mainFlex {
+    display: flex;
+    flex-direction: column;
+}
 
-  
+.logoDesign {
+    display: flex;
+    align-items: center;
+}
+
+.logoDesign img {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.contain {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem;
+    overflow: hidden; /* Prevents horizontal scroll */
+}
+
+.box {
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 18px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1); /* Slight transparency */
+    backdrop-filter: blur(10px);
+    margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: scale(1.02);
+}
+
+.typography {
+    color: #fff;
+}
+
+.imgFlex {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.imgFlex img {
+    height: 40vh;
+    border-radius: 18px;
+}
+
+#wel {
+    border-radius: 50%;
+}
+
+.teamCard {
+    background: linear-gradient(135deg, #673ab7, #3f51b5); /* Purple and blue gradient */
+    color: white;
+    border-radius: 18px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.teamCard:hover {
+    transform: translateY(-5px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .imgFlex {
+        flex-direction: column;
+    }
+
+    .imgFlex img {
+        height: auto;
+        width: 100%;
+    }
+
+    .teamCard {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .box {
+        padding: 1rem;
+    }
+
+    .teamCard {
+        margin-bottom: 1rem;
+    }
+}
