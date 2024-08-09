@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.views import APIView
-
+from rest_framework import serializers
 from rest_framework import status
 from .serializers import GeminiSerializer
 import google.generativeai as genai
@@ -23,48 +23,35 @@ class TestView(GenericViewSet):
         return Response({"message":"hello world"})
 genai.configure(api_key=test_key)
 
+
 class GeminiViewSet(APIView):
     def post(self, request):
         serializer = GeminiSerializer(data=request.data)
         if serializer.is_valid():
             prompt = serializer.validated_data['message']
+            chat_history = serializer.validated_data.get('chatHistory', [])
+            print(chat_history)
             try:
-                print('This route executed')
                 model = genai.GenerativeModel("gemini-pro")
-                print('This route executed 1')
-                chat = model.start_chat()
+                
+                # Start chat with history
+                chat = model.start_chat(history=chat_history)
                 response = chat.send_message(prompt)
-                # print("This should be the response actually: ",response.text)
+
                 return Response({'response': response.text}, status=status.HTTP_200_OK)
             except Exception as e:
-                print(f'At line {e.__traceback__.tb_lineno}:{e.args[0]}')
-                return Response({'error': f'Error: {e.args}'}, status=status.HTTP_400_BAD_REQUEST)
+                print(f'Error at line {e.__traceback__.tb_lineno}: {str(e)}')
+                return Response({'error': f'Error: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class GeminiSerializer(serializers.Serializer):
+    message = serializers.CharField()
+    chatHistory = serializers.ListField(child=serializers.DictField(), required=False)
+    print(chatHistory)
+
 #should try to keep track of history
 
-# class GeminiViewSet(APIView):
-#     def post(self, request):
-#         serializer = GeminiSerializer(data=request.data)
-#         if serializer.is_valid():
-#             prompt = serializer.validated_data['prompt']
-#             history = serializer.validated_data.get('history', [])
-            
-#             try:
-#                 model = genai.GenerativeModel("gemini-pro")
-#                 chat = model.start_chat()
-                
-#                 # Send the entire conversation history to the model
-#                 for message in history:
-#                     chat.send_message(message)
-                    
-#                 response = chat.send_message(prompt)
-                
-#                 return Response({'response': response.text}, status=status.HTTP_200_OK)
-#             except Exception as e:
-#                 return Response({'error': f'Error: {e.args}'}, status=status.HTTP_400_BAD_REQUEST)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
