@@ -24,6 +24,7 @@ import Gallery from "./Gallery";
 import Mic from "./Mic";
 import ThreeBodyLoader from "./ThreeBodyLoader";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import History from "./Sidebar"
 
 // Messages component
 export default function Messages() {

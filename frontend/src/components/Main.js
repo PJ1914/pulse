@@ -1,16 +1,18 @@
+// Main.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Container, Box, Button, CssBaseline, Card, CardContent, CardMedia, Grid } from '@mui/material';
+import { AppBar, Toolbar, Typography, Container, Box, Button, CssBaseline, Menu, MenuItem, Avatar } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { auth } from '../config/config';
 import { signOut } from 'firebase/auth';
+import axios from 'axios'; 
 import logo from '../assets/pulse_logo.png';
 import welcome from '../assets/welcome.png';
 import meet from '../assets/meet my team.png';
+import { Grid, Card, CardContent, CardMedia } from '@mui/material';
 import about from '../assets/About Pulse.png';
-import axios from 'axios';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 import './Main.css';
 
 const darkTheme = createTheme({
@@ -39,17 +41,9 @@ const darkTheme = createTheme({
 
 const Main = ({ data }) => {
   const nav = useNavigate();
-  const logOut = async () => {
-    try {
-      await signOut(auth);
-      console.log("Sign-out successful.");
-      nav('/login');
-    } catch (error) {
-      console.error("An error happened during sign-out:", error);
-    }
-  };
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -69,6 +63,16 @@ const Main = ({ data }) => {
     }
   }, []);
 
+  const logOut = async () => {
+    try {
+      await signOut(auth);
+      console.log("Sign-out successful.");
+      nav('/login');
+    } catch (error) {
+      console.error("An error happened during sign-out:", error);
+    }
+  };
+
   const handleGitLogout = () => {
     axios.get('http://127.0.0.1/logout')
       .then(() => {
@@ -77,6 +81,14 @@ const Main = ({ data }) => {
       .catch(error => {
         console.error('Error logging out:', error);
       });
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const teamMembers = [
@@ -89,7 +101,6 @@ const Main = ({ data }) => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      {/* Header */}
       <div className='mainFlex'>
         <AppBar position="sticky" sx={{ zIndex: 1201, padding: '10px' }}>
           <Toolbar sx={{ padding: 0.5 }}>
@@ -104,10 +115,19 @@ const Main = ({ data }) => {
                 <Link to="/login">
                   <Button color="inherit">Login</Button>
                 </Link>
-              ) : user ? (
-                <Button color="inherit" onClick={handleGitLogout}>Log out</Button>
               ) : (
-                <Button color="inherit" onClick={logOut}>Log out</Button>
+                <>
+                  <Avatar src={user?.avatar_url || auth.currentUser.photoURL} alt={user?.name || auth.currentUser.displayName} onClick={handleMenu} style={{ cursor: 'pointer' }} />
+                  <Menu
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose} component={Link} to="/profile">Profile</MenuItem>
+                    <MenuItem onClick={user ? handleGitLogout : logOut}>Log out</MenuItem>
+                  </Menu>
+                </>
               )}
             </Box>
           </Toolbar>
