@@ -91,40 +91,40 @@ export default function Messages() {
     [user]
   );
 
-  const action = useCallback(async () => {
-    if (!prompt) {
-      toast.error("Enter a prompt");
-      return;
-    }
+  // const action = useCallback(async () => {
+  //   if (!prompt) {
+  //     toast.error("Enter a prompt");
+  //     return;
+  //   }
 
-    const userMessage = { content: prompt, role: "user" };
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
-    setLoading(true);
+  //   const userMessage = { content: prompt, role: "user" };
+  //   setMessages((prevMessages) => [...prevMessages, userMessage]);
+  //   setLoading(true);
 
-    try {
-      const response = await axios.post(process.env.REACT_APP_GEMINI_URL, {
-        message: prompt,
-      });
+  //   try {
+  //     const response = await axios.post(process.env.REACT_APP_GEMINI_URL, {
+  //       message: prompt,
+  //     });
 
-      if (response.status === 200) {
-        const botMessage = { content: response.data.response, role: "bot" };
-        setMessages((prevMessages) => [...prevMessages, botMessage]);
+  //     if (response.status === 200) {
+  //       const botMessage = { content: response.data.response, role: "bot" };
+  //       setMessages((prevMessages) => [...prevMessages, botMessage]);
 
-        await sendMessage(prompt);
-        await sendMessage(botMessage.content, "bot");
+  //       await sendMessage(prompt);
+  //       await sendMessage(botMessage.content, "bot");
 
-        setPrompt("");
-        inputRef.current.value = "";
-      } else {
-        toast.error("INTERNAL SERVER ERROR (500)");
-      }
-    } catch (error) {
-      console.error("Error occurred:", error.message);
-      toast.error("Error occurred while processing your request");
-    } finally {
-      setLoading(false);
-    }
-  }, [prompt, sendMessage]);
+  //       setPrompt("");
+  //       inputRef.current.value = "";
+  //     } else {
+  //       toast.error("INTERNAL SERVER ERROR (500)");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error occurred:", error.message);
+  //     toast.error("Error occurred while processing your request");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, [prompt, sendMessage]);
 
 
   //should try to keep track of history
@@ -167,6 +167,48 @@ export default function Messages() {
   //   }
   // }, [prompt, sendMessage, messages]);
   
+  const action = useCallback(async () => {
+    if (!prompt || !user) {
+      toast.error("Enter a prompt and ensure you're logged in");
+      return;
+    }
+  
+    setLoading(true);
+  
+    try {
+      // Prepare chat history
+      const chatHistory = messages.map(msg => ({
+        role: msg.role,
+        parts: [msg.content]
+      }));
+  
+      const response = await axios.post(process.env.REACT_APP_GEMINI_URL, {
+        message: prompt,
+        chatHistory: chatHistory
+      });
+  
+      if (response.status === 200) {
+        const botMessage = { content: response.data.response, role: "model" };
+        setMessages((prevMessages) => [...prevMessages, 
+          { content: prompt, role: "user" },
+          botMessage
+        ]);
+  
+        await sendMessage(prompt);
+        await sendMessage(botMessage.content, "model");
+  
+        setPrompt("");
+        inputRef.current.value = "";
+      } else {
+        toast.error("INTERNAL SERVER ERROR (500)");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
+      toast.error("Error occurred while processing your request");
+    } finally {
+      setLoading(false);
+    }
+  }, [prompt, user, messages, sendMessage]);
 
   const handleFileSelect = (file) => {
     const fileUrl = URL.createObjectURL(file);
@@ -250,13 +292,13 @@ const MessageList = ({ messages, onCopy, copiedIds }) => (
 
 // Message component
 const Message = ({ message, isCopied, onCopy }) => (
-  <div className={`message ${message.role === "user" ? "message-user" : "message-bot"}`}>
+  <div className={`message ${message.role === "user" ? "message-user" : "message-model"}`}>
     {message.role !== "user" && (
       <p className="CopyContent" onClick={onCopy}>
         {isCopied ? <CheckBoxIcon /> : <ContentCopyIcon />}
       </p>
     )}
-    {message.role === "bot" ? (
+    {message.role === "model" ? (
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
     ) : message.type ? (
       message.type.startsWith("image/") ? (
