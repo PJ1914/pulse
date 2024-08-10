@@ -5,7 +5,7 @@ import PulseAni from './components/PulseAni';
 import Main from './components/Main';
 import Messages from './components/messages/Messages';
 import Weather from './components/Weather';
-import LoginPage from './components/LoginPage';
+import LoginPage from './components/login page/LoginPage';
 import VoiceAsist from './components/AI voice/VoiceAsist'; 
 import ItemList from './services/ItemList';
 import ProtectedRoute from './ProtectedRoute';

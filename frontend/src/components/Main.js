@@ -1,19 +1,22 @@
 // Main.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Container, Box, Button, CssBaseline, Menu, MenuItem, Avatar } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, Button, CssBaseline, Menu, MenuItem, Avatar } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { auth } from '../config/config';
 import { signOut } from 'firebase/auth';
 import axios from 'axios'; 
 import logo from '../assets/pulse_logo.png';
-import welcome from '../assets/welcome.png';
+import backgroundImage from '../assets/main page/backgroundimg.png';
 import meet from '../assets/meet my team.png';
 import { Grid, Card, CardContent, CardMedia } from '@mui/material';
-import about from '../assets/About Pulse.png';
+import robotHandImage from '../assets/main page/htggdjhdfg 1.png';
+import circuitOverlay from '../assets/main page/surface.png'; 
+import blackOverlay from '../assets/main page/Rectangle 12.png';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import './Main.css';
+import AboutUs from './About-us/AboutUs';
 
 const darkTheme = createTheme({
   palette: {
@@ -32,7 +35,7 @@ const darkTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: '#1c1c1c',
+          backgroundColor: '#000000',
         },
       },
     },
@@ -132,113 +135,25 @@ const Main = ({ data }) => {
             </Box>
           </Toolbar>
         </AppBar>
-
-        <Container className="contain">
-          <Box className="box welcome-box">
-            <Typography variant="h4" component="h1" className="typography" gutterBottom>Welcome to Pulse AI</Typography>
-            <div className="imgFlex">
-              <div>
-                <Typography>Experience the next wave of technology with Pulse AI. Our innovative platform harnesses the power of artificial intelligence to bring you intuitive, intelligent solutions that simplify your daily life. From real-time insights to personalized AI assistance, Pulse AI transforms the way you interact with technology.</Typography>
-              </div>
-              <img src={welcome} alt="welcome" id="wel" />
-            </div>
-          </Box>
-
-          <Box className="box">
-            <Typography variant="h5" component="h2" className="typography" gutterBottom>About Pulse AI</Typography>
-            <div className="imgFlex">
-              <div>
-                <Typography>Pulse AI was created by Pranay Jumbarthi, a passionate full-stack developer and lifelong learner. His vision was to create a platform where AI could seamlessly blend with everyday tasks to make life easier and more productive.</Typography>
-                <Typography>Our Mission: At Pulse AI, we aim to bring AI technology to everyone. We believe that artificial intelligence should be accessible, easy to use, and tailored to your needs. Our goal is to integrate AI into your daily routine, enhancing productivity and creativity with every interaction.</Typography>
-              </div>
-              <img src={about} alt="about" />
-            </div>
-          </Box>
-
-          <Box className="box">
-            <Typography variant="h5" component="h2" className="typography" gutterBottom>Meet the Team</Typography>
-            <Grid container spacing={2}>
-              {teamMembers.map(member => (
-                <Grid item xs={12} sm={6} md={3} key={member.name}>
-                  <Card className="teamCard">
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={member.image}
-                      alt={member.name}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h6" component="div">{member.name}</Typography>
-                      <Typography variant="body2" color="textSecondary">{member.role}</Typography>
-                      <Typography variant="body2" color="textSecondary">{member.description}</Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-
-          <Box className="box">
-            <Typography variant="h5" component="h2" className="typography" gutterBottom>What Pulse AI Can Do</Typography>
-            <ul style={{ "listStyle": "none", "padding": 0 }}>
-              <li>AI Chatbot: Engage with our AI chatbot for real-time answers, assistance, and information. It's like having a personal assistant at your fingertips.</li>
-              <li>Custom Widgets: Tailor your Pulse AI dashboard with widgets that suit your needs, from weather updates to news feeds and more.</li>
-              <li>Easy Integration: Seamlessly connect Pulse AI with your existing systems and platforms for a cohesive, unified experience.</li>
-            </ul>
-          </Box>
-
-          <Box className="box">
-            <Typography variant="h5" component="h2" className="typography" gutterBottom>Discover Pulse AI Intelligence</Typography>
-            <div className="imgFlex">
-              <div>
-                <Typography>Dive into Pulse AI Intelligence for advanced data analysis and smart technology solutions. Personalize your experience with interactive buttons and icons, making it easy to get exactly what you need from the platform.</Typography>
+        
+        <div className="hero-section" style={{ backgroundImage: `url(${blackOverlay}), url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh' }}>
+            <div className="content">
+              <img src={circuitOverlay} alt="Circuit Overlay" className="circuit-overlay" />
+              <img src={robotHandImage} alt="Robot Hand" style={{ position: 'absolute', right: 0, bottom: 0, width: '50%' }} />
+              <div className="circuit-text">Pulse AI</div>
+                <h1>Welcome to</h1>
+                <p>Experience the next wave of technology with Pulse AI. Our innovative platform harnesses the power of artificial intelligence to bring you intuitive, intelligent solutions that simplify your daily life. From real-time insights to personalized AI assistance, Pulse AI transforms the way you interact with technology.</p>
+                <div className="buttons">
+                  <Link to="/messages" style={{ textDecoration: 'none' }}>
+                    <button onClick={() => console.log('Chatbot Opened')}>Open Chatbot</button>
+                  </Link>
+                  <Link to="/voice" style={{ textDecoration: 'none' }}>
+                    <button onClick={() => console.log('Exploring Intelligence')}>Explore Intelligence</button>
+                  </Link>
               </div>
             </div>
-          </Box>
-
-          <Box className="box">
-            <Typography variant="h5" component="h2" className="typography" gutterBottom>Learn More About Us</Typography>
-            <div className="imgFlex">
-              <div>
-                <Typography>Scroll down to explore the technology behind Pulse AI and meet the team making it happen. Along the way, you'll find our AI chatbot ready to assist you and a deeper look into Pulse AI Intelligence—where innovation and interaction come together.</Typography>
-              </div>
-            </div>
-          </Box>
-
-          <Box my={4} textAlign="center">
-            <Typography variant="h5" component="h2" gutterBottom>Pulse AI Chat Bot</Typography>
-            <Link to="/messages" style={{ textDecoration: "none" }}>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<ChatBubbleIcon />}
-                style={{ marginTop: '10px' }}
-              >
-                Open Chat Bot
-              </Button>
-            </Link>
-          </Box>
-
-          <Box my={4} textAlign="center">
-            <Typography variant="h5" component="h2" gutterBottom>PULSE AI INTELLIGENCE</Typography>
-            <Link to="/voice" style={{ textDecoration: "none" }}>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<SmartToyIcon />}
-                style={{ marginTop: '10px' }}
-              >
-                Explore Intelligence
-              </Button>
-            </Link>
-          </Box>
-
-          <Box mt={5} py={3} bgcolor="background.paper" textAlign="center">
-            <Typography variant="body2" color="textSecondary">
-              © 2024 Pulse. All rights reserved.
-            </Typography>
-          </Box>
-        </Container>
+        </div>
+        <AboutUs />
       </div>
     </ThemeProvider>
   );

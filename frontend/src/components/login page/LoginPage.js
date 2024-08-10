@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { auth } from '../config/config';
+import { auth } from '../../config/config';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import pulseLogo from '../assets/pulse_logo.png'; // Adjust the path as necessary
+import pulseLogo from '../../assets/pulse_logo.png'; // Adjust the path as necessary
 
 const Container = styled.div`
   display: flex;
