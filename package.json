@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@react-spring/web": "^9.7.3",
-    "aos": "^2.3.4",
-    "gh-pages": "^6.1.1",
-    "react-firebase-hooks": "^5.1.1",
-    "react-spring": "^9.7.3"
-  }
-}
