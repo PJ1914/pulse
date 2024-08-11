@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import dev1 from "../../assets/Team/Pranay.png";
 import dev2 from "../../assets/Team/Rajesh.png";
 import dev3 from "../../assets/Team/TarikAli.png";
@@ -31,14 +31,25 @@ const MeetTheTeam = () => {
     {
       name: "AMIT KUMAR RAM",
       img: dev5,
-      role: "Passionate graphic designer with a strong focus on UI/UX, currently responsible for designing the intuitive and visually engaging interface for the Pulse AI website. Bringing creativity and attention to detail, I aim to enhance user experiences and create impactful digital solutions.",
+      role: "Passionate graphic designer with a strong focus on UI/UX, currently responsible for designing  the Pulse AI website.",
     },
   ];
 
+  const wrapperRef = useRef(null);
+
+  const scrollToDev = (index) => {
+    const wrapper = wrapperRef.current;
+    const devWidth = 300 + 20; // width of each dev-container + margin
+    wrapper.scrollTo({
+      left: index * devWidth,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="devs-main">
-      <div className="devs-wrapper">
-        {developers.slice(0, 4).map((dev, ind) => (
+      <div className="devs-wrapper" ref={wrapperRef}>
+        {developers.map((dev, ind) => (
           <div className="dev-container" key={ind}>
             <img className="dev-img" src={dev.img} />
             <div className="description">
@@ -47,11 +58,13 @@ const MeetTheTeam = () => {
             </div>
           </div>
         ))}
-        <div className="dots">
-          {developers.slice(0, 4).map((dev, ind) => (
-            <div className="dot">•</div>
-          ))}
-        </div>
+      </div>
+      <div className="dev-dots">
+        {developers.map((dev, ind) => (
+          <div className="dev-dot" key={ind} onClick={() => scrollToDev(ind)}>
+            •
+          </div>
+        ))}
       </div>
     </div>
   );
