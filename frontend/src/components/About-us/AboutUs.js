@@ -1,35 +1,32 @@
 import React, { useEffect, useState } from "react";
 import "./AboutUs.css";
-import newBackground from "../../assets/main page/background.png"; // Update the path to your new background image
+import newBackground from "../../assets/main page/background.png";
 import About1 from "../../../src/assets/Aboutpulse1.png";
 import About2 from "../../../src/assets/About2.png";
 import About3 from "../../../src/assets/About3.png";
 import tree from "../../assets/main page/BLUE_TECHNOLOGY_TREE_Men_s_Perfect_Tee_By_pilipsjanuarius_-_Design_By_Humans-removebg-preview 1.png";
+
 const AboutUs = () => {
   const images = [About1, About2, About3];
   const [index, setIndex] = useState(0);
-  const handleImage=(ind)=>{
-   setIndex(ind)
 
-  }
+  const handleImage = (ind) => {
+    setIndex(ind);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
-      if (index >= images.length - 1) {
-        setIndex(0);
-      } else {
-        setIndex(index + 1);
-      }
+      setIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
     }, 3000);
-  
-    // Clear interval on component unmount
+
     return () => clearInterval(interval);
-  }, [index, images.length]);
-  
+  }, [images.length]);
+
   return (
     <div className="about-wrapper">
       {/* Left */}
       <div className="about-section">
-        <img className="tree" src={tree} />
+        <img className="tree" src={tree} alt="Decorative Tree" />
         <h1 className="about-h1">About Us</h1>
         <span className="arrow"></span>
         <p className="about-p">
@@ -45,10 +42,10 @@ const AboutUs = () => {
       </div>
       {/* Right */}
       <div className="right">
-        <img className="about-image" src={images[index]} />
+        <img className="about-image" src={images[index]} alt="About Us" />
         <div className="dots">
           {images.map((img, ind) => (
-            <div className="dot" key={ind} onClick={()=>handleImage(ind)}>•</div>
+            <div className="dot" key={ind} onClick={() => handleImage(ind)} role="button">•</div>
           ))}
         </div>
       </div>
