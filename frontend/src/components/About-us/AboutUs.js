@@ -5,6 +5,7 @@ import About1 from "../../../src/assets/Aboutpulse1.png";
 import About2 from "../../../src/assets/About2.png";
 import About3 from "../../../src/assets/About3.png";
 import tree from "../../assets/main page/BLUE_TECHNOLOGY_TREE_Men_s_Perfect_Tee_By_pilipsjanuarius_-_Design_By_Humans-removebg-preview 1.png";
+import MeetTheTeam from "../Team/MeetTheTeam";
 const AboutUs = () => {
   const images = [About1, About2, About3];
   const [index, setIndex] = useState(0);
@@ -25,7 +26,7 @@ const AboutUs = () => {
     return () => clearInterval(interval);
   }, [index, images.length]);
   
-  return (
+  return (<>
     <div className="about-wrapper">
       {/* Left */}
       <div className="about-section">
@@ -53,6 +54,8 @@ const AboutUs = () => {
         </div>
       </div>
     </div>
+    <MeetTheTeam/>
+    </>
   );
 };
 
