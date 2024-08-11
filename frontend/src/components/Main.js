@@ -1,22 +1,18 @@
-// Main.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Box, Button, CssBaseline, Menu, MenuItem, Avatar } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { auth } from '../config/config';
+import { AppBar, Toolbar, Typography, Box, Button, CssBaseline, Menu, MenuItem, Avatar, ThemeProvider, createTheme } from '@mui/material';
 import { signOut } from 'firebase/auth';
-import axios from 'axios'; 
+import axios from 'axios';
 import logo from '../assets/pulse_logo.png';
 import backgroundImage from '../assets/main page/backgroundimg.png';
 import meet from '../assets/meet my team.png';
-import { Grid, Card, CardContent, CardMedia } from '@mui/material';
+import MeetTheTeam from './Team/MeetTheTeam';
 import robotHandImage from '../assets/main page/htggdjhdfg 1.png';
-import circuitOverlay from '../assets/main page/surface.png'; 
+import circuitOverlay from '../assets/main page/surface.png';
 import blackOverlay from '../assets/main page/Rectangle 12.png';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
-import './Main.css';
 import AboutUs from './About-us/AboutUs';
+import './Main.css';
+import { auth } from '../config/config';
 
 const darkTheme = createTheme({
   palette: {
@@ -51,7 +47,6 @@ const Main = ({ data }) => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('token');
-
     if (accessToken) {
       setToken(accessToken);
       axios.get('https://api.github.com/user', {
@@ -94,13 +89,6 @@ const Main = ({ data }) => {
     setAnchorEl(null);
   };
 
-  const teamMembers = [
-    { name: 'Pranay Jumbarthi', role: 'Full-stack Developer', description: 'The mastermind behind Pulse AI, Pranay is a full-stack developer with a love for learning and innovation.', image: meet },
-    { name: 'Vishwa', role: 'Full-stack Developer', description: 'Ensures that Pulse AI delivers a seamless user experience.', image: meet },
-    { name: 'Tarik Ali', role: 'Backend Expert', description: 'Excels at solving complex problems and streamlining data management.', image: meet },
-    { name: 'Durga Prasad', role: 'Full-stack Developer', description: 'Helps to build a robust and scalable platform.', image: meet }
-  ];
-
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -139,21 +127,22 @@ const Main = ({ data }) => {
         <div className="hero-section" style={{ backgroundImage: `url(${blackOverlay}), url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh' }}>
             <div className="content">
               <img src={circuitOverlay} alt="Circuit Overlay" className="circuit-overlay" />
-              <img src={robotHandImage} alt="Robot Hand" style={{ position: 'absolute', right: 0, bottom: 0, width: '50%' }} />
+              <img src={robotHandImage} alt="Robot Hand" className="robot-hand" />
               <div className="circuit-text">Pulse AI</div>
-                <h1>Welcome to</h1>
-                <p>Experience the next wave of technology with Pulse AI. Our innovative platform harnesses the power of artificial intelligence to bring you intuitive, intelligent solutions that simplify your daily life. From real-time insights to personalized AI assistance, Pulse AI transforms the way you interact with technology.</p>
+                <h1 className="typing">Welcome to</h1>
+                <p className="fade-in-text">Experience the next wave of technology with Pulse AI. Our innovative platform harnesses the power of artificial intelligence to bring you intuitive, intelligent solutions that simplify your daily life. From real-time insights to personalized AI assistance, Pulse AI transforms the way you interact with technology.</p>
                 <div className="buttons">
                   <Link to="/messages" style={{ textDecoration: 'none' }}>
-                    <button onClick={() => console.log('Chatbot Opened')}>Open Chatbot</button>
+                    <button className="animated-button" onClick={() => console.log('Chatbot Opened')}>Open Chatbot</button>
                   </Link>
                   <Link to="/voice" style={{ textDecoration: 'none' }}>
-                    <button onClick={() => console.log('Exploring Intelligence')}>Explore Intelligence</button>
+                    <button className="animated-button" onClick={() => console.log('Exploring Intelligence')}>Explore Intelligence</button>
                   </Link>
               </div>
             </div>
         </div>
         <AboutUs />
+        <MeetTheTeam />
       </div>
     </ThemeProvider>
   );

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./AboutUs.css";
-import newBackground from "../../assets/main page/background.png";
 import About1 from "../../../src/assets/Aboutpulse1.png";
 import About2 from "../../../src/assets/About2.png";
 import About3 from "../../../src/assets/About3.png";
 import tree from "../../assets/main page/BLUE_TECHNOLOGY_TREE_Men_s_Perfect_Tee_By_pilipsjanuarius_-_Design_By_Humans-removebg-preview 1.png";
 
+import MeetTheTeam from "../Team/MeetTheTeam";
 const AboutUs = () => {
   const images = [About1, About2, About3];
   const [index, setIndex] = useState(0);

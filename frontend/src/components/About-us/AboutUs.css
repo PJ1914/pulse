@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .about-wrapper {
     display: flex;
     height: 100vh;
@@ -9,9 +11,9 @@
     padding: 10%;
     background-image: url("../../assets/main page/background.png");
     background-position: 100%;
-  }
-  
-  .about-section {
+}
+
+.about-section {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -25,21 +27,27 @@
     position: relative;
     border: 1px solid #58B0E0;
     border-radius: 3%;
-  }
-  
-  .tree {
+}
+
+.tree {
     height: 95%;
     z-index: 1;
     position: absolute;
     padding-right: 10px;
-  }
-  
-  .right {
+    animation: sway 5s infinite alternate ease-in-out;
+}
+
+@keyframes sway {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(3deg); }
+}
+
+.right {
     width: 50%;
     position: relative;
-  }
-  
-  .about-image {
+}
+
+.about-image {
     height: 440px;
     width: 100%;
     object-fit: fill;
@@ -47,45 +55,56 @@
     border-radius: 3%;
     position: relative;
     z-index: 1;
-  }
-  
-  .dots {
+    transition: opacity 1s ease-in-out; /* Smooth transition for carousel */
+}
+
+.dots {
     display: flex;
     justify-content: center;
     position: absolute;
     bottom: 15px;
     width: 100%;
     z-index: 2;
-  }
-  
-  .dot {
+}
+
+.dot {
     font-size: 30px;
     margin: 0 3px;
     cursor: pointer;
-  }
-  
-  .about-h1 {
+    transition: transform 0.5s ease;
+}
+
+.dot:hover {
+    transform: scale(1.5);
+}
+
+.about-h1 {
     text-align: left;
     text-transform: uppercase;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     font-weight: 700;
     line-height: 40px;
-    text-align: left;
     z-index: 10;
     position: relative;
-  }
-  
-  .arrow {
+}
+
+.arrow {
     height: 1px;
     border: 2px solid #58B0E0;
     width: 30%;
     margin-bottom: 3%;
     z-index: 10;
     position: relative;
-  }
-  
-  .about-p {
+    animation: expandArrow 2s infinite;
+}
+
+@keyframes expandArrow {
+    0%, 100% { width: 30%; }
+    50% { width: 100%; }
+}
+
+.about-p {
     font-family: Arial;
     font-size: 18px;
     font-weight: 400;
@@ -93,5 +112,4 @@
     text-align: left;
     z-index: 1;
     position: relative;
-  }
-  
+}

@@ -26,6 +26,8 @@
     height: 100vh;
     width: 100%;
     position: relative;
+    background-size: cover;
+    background-position: center;
 }
 
 .content {
@@ -35,25 +37,71 @@
     width: 50%;
 }
 
-.hero-section h1, .circuit-text {
+.typing {
     font-family: 'Orbitron', sans-serif;
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 20px;
     text-transform: uppercase;
     color: #B2F7EF;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(12) 0.5s forwards;
 }
 
-.hero-section p {
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #B2F7EF }
+}
+
+.fade-in-text {
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     color: white;
     width: 80%;
     margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeIn 2s 1s forwards;
 }
 
-.buttons {
-    align-self: flex-start;
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.circuit-overlay {
+    position: absolute;
+    top: 10%;
+    left: 56%;
+    right: 0;
+    bottom: 0;
+    background-size: contain;
+    opacity: 0.5;
+    animation: pulse 3s infinite;
+    border-radius: 50%;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.robot-hand {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    animation: slideUp 1.5s forwards;
+    opacity: 0;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .buttons button {
@@ -65,32 +113,24 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.buttons button:hover {
+.animated-button:hover {
     background-color: #334668;
-}
-
-.circuit-overlay {
-    position: absolute;
-    top: 10%;
-    left: 56%;
-    right: 0;
-    bottom: 0;
-    background: url('../assets/main page/surface.png') no-repeat center center;
-    background-size: contain;
-    opacity: 0.5;
-    border-radius: 60%;
+    transform: translateY(-5px) scale(1.05);
 }
 
 .circuit-text {
+    font-family: 'Orbitron', sans-serif;
+    color: #B2F7EF;
     position: absolute;
     top: 32%;
-    left: 59%;
+    left: 60%;
     font-size: 60px;
     z-index: 3;
+    animation: pulse 3s infinite;
     animation: slideFadeIn 1s ease-out forwards;
-
 }
 
 @keyframes slideFadeIn {
@@ -103,4 +143,3 @@
         transform: translateY(0);
     }
 }
-
