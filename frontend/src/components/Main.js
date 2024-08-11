@@ -13,6 +13,8 @@ import blackOverlay from '../assets/main page/Rectangle 12.png';
 import AboutUs from './About-us/AboutUs';
 import './Main.css';
 import { auth } from '../config/config';
+import Footer from './CopyRights/Footer';
+import WhatPulseAiCanDo from './WhatPulse/WhatPulseAICanDo';
 
 const darkTheme = createTheme({
   palette: {
@@ -143,6 +145,9 @@ const Main = ({ data }) => {
         </div>
         <AboutUs />
         <MeetTheTeam />
+        <WhatPulseAiCanDo />
+        <Footer />
+        
       </div>
     </ThemeProvider>
   );
