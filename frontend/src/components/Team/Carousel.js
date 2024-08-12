@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import "./Carousel.css"; // Ensure this is the correct path to your CSS file
+import "./Carousel.css"; 
 
 const Carousel = ({ items }) => {
   const wrapperRef = useRef(null);
@@ -28,8 +28,7 @@ const Carousel = ({ items }) => {
           <div
             className={`dev-container ${index === activeIndex ? "active" : ""}`}
             key={index}
-            onClick={() => updateIndex(index)}
-          >
+            onClick={() => updateIndex(index)}>
             <img className="dev-img" src={item.img} alt={item.name} />
             <div className="description">
               <p className="name">{item.name}</p>

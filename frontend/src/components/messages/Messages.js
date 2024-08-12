@@ -290,7 +290,7 @@ const MessageInput = ({
       </div>
       {loading ? (
         <div className="send-button">
-          <ThreeBodyLoader />
+          {/* <ThreeBodyLoader /> */}
         </div>
       ) : (
         <button className="send-button" onClick={onSend} disabled={!isTyping}>

@@ -1,10 +1,11 @@
-import * as React from "react";
+// import * as React from "react";
 const Icon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={1478}
     height={305}
     fill="none"
+    style={{position:"relative",marginBottom:"5%"}}
     {...props}
   >
     <path

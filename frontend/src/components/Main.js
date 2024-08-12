@@ -39,6 +39,7 @@ import './Main.css';
 import { auth } from '../config/config';
 import Footer from './CopyRights/Footer';
 import WhatPulseAiCanDo from './WhatPulse/WhatPulseAICanDo';
+import TryPulse from './PulseComp/TryPulse';
 
 const darkTheme = createTheme({
   palette: {
@@ -257,6 +258,7 @@ const Main = () => {
         <AboutUs />
         <MeetTheTeam />
         <WhatPulseAiCanDo />
+        <TryPulse/>
         <Footer />
       </div>
     </ThemeProvider>
