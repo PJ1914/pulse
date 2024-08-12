@@ -14,7 +14,7 @@
   justify-content: flex-start;
   align-items: center;
   height: 60vh;
-  width: 83vw;
+  width: 63vw;
   overflow-x: scroll; 
   scroll-snap-type: x mandatory; 
 }

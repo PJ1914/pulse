@@ -1,25 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { auth } from '../../config/config';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faGoogle, faFacebook, faGithub,faMailchimp } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faLock,faUser } from '@fortawesome/free-solid-svg-icons';
 import pulseLogo from '../../assets/pulse_logo.png'; // Adjust the path as necessary
+import Logo1 from '../../assets/Login/Logo1.png'
+import Logo2 from '../../assets/Login/Logo2.png'
+import Logo3 from '../../assets/Login/Logo3.png'
+import LoginCarosual from './LoginCarosual';
+const Logos = [Logo1, Logo2, Logo3];
+var index = 0;
+var logo = Logos[index];
+
+setInterval(() => {
+  index = (index + 1) % Logos.length;
+  logo = Logos[index];
+  console.log(index,logo);
+}, 2000);
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #E0E7FF; /* Light purple background */
+  background-image:'../../assets/Login/LoginBG.png'; /* Light purple background */
 `;
 
 const PanelWrapper = styled.div`
   display: flex;
   width: 100%;
-  max-width: 800px;
+  max-width: 80%;
   justify-content: center;
   align-items: stretch;
 `;
@@ -41,6 +54,7 @@ const FormWrapper = styled.div`
 const Title = styled.h2`
   margin-bottom: 20px;
   color: #1F2937;
+  font-size:1rem;
   font-family: 'Roboto', sans-serif;
 `;
 
@@ -68,6 +82,7 @@ const SocialButton = styled.button`
 `;
 
 const Divider = styled.div`
+color: black;
   display: flex;
   align-items: center;
   margin: 20px 0;
@@ -98,9 +113,10 @@ const InputWrapper = styled.div`
 const Icon = styled(FontAwesomeIcon)`
   position: absolute;
   top: 50%;
-  left: 10px;
+  left: 35px;
+  padding-left: -20px;
   transform: translateY(-50%);
-  color: #9CA3AF;
+  color: black;
 `;
 
 const Input = styled.input`
@@ -112,6 +128,7 @@ const Input = styled.input`
   color: #1F2937;
   background-color: #F3F4F6; /* Light grey background */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
 
   &:focus {
     outline: none;
@@ -120,12 +137,15 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  padding: 12px 24px; /* Smaller width */
+margin-top: 30px;
+  padding: 12px 30px; /* Smaller width */
   margin-bottom: 12px;
-  background-color: #4F46E5; /* Blue button */
+  /* background-color: #4F46E5; Blue button */
+  background: #2978D1;
+
   color: white;
   border: none;
-  border-radius: 25px;
+  border-radius: 15px;
   font-size: 16px;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -148,23 +168,24 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const SignUpPanel = styled.div`
-  background: linear-gradient(135deg, #1D4ED8, #6366F1); /* Gradient background */
-  background-image: url(${pulseLogo});
-  background-size: cover;
-  background-position: center;
-  color: white;
-  padding: 40px;
-  border-radius: 0 8px 8px 0;
-  text-align: center;
-  max-width: 400px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 1; /* Ensure it grows to fill the space */
-  position: relative;
-`;
+// const SignUpPanel = styled.div`
+//   background: linear-gradient(135deg, #1D4ED8, #6366F1); /* Gradient background */
+//   background-image: url(${logo});
+//   background-size:contain;
+//   background-position: center;
+//   color: white;
+//   padding: 40px;
+//   border-radius: 0 8px 8px 0;
+//   text-align: center;
+
+//   /* max-width: ; */
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   flex-grow: 1; /* Ensure it grows to fill the space */
+//   position: relative;
+// `;
 
 const Overlay = styled.div`
   border-radius: 8px;
@@ -227,26 +248,37 @@ const LoginPage = () => {
   return (
     <Container>
       <PanelWrapper>
+    <LoginCarosual/>
         <FormWrapper>
-          <Title>Login to Your Account</Title>
-          <SocialButtonsContainer>
-            <SocialButton bgColor="#4267B2" onClick={handleGoogleLogin}>
-              <FontAwesomeIcon icon={faFacebook} />
-            </SocialButton>
-            <SocialButton bgColor="#DB4437" onClick={handleGoogleLogin}>
-              <FontAwesomeIcon icon={faGoogle} />
-            </SocialButton>
-            <SocialButton bgColor="#333" onClick={handleGitLogin}>
-              <FontAwesomeIcon icon={faGithub} />
-            </SocialButton>
-          </SocialButtonsContainer>
+          <Title>Welcome to Pulse AI, Sign up or Login</Title>
+          <InputWrapper>
+          <Icon icon={faGoogle} />
+          <Input 
+                type="text" 
+                placeholder="Google" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)}
+                required 
+              />
+          </InputWrapper>
+          <InputWrapper>
+          <Icon icon={faEnvelope} />
+          <Input 
+                type="text" 
+                placeholder="Mail" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)}
+                required 
+              />
+          </InputWrapper>
+
           <Divider>OR</Divider>
           <form onSubmit={handleEmailLogin}>
             <InputWrapper>
-              <Icon icon={faEnvelope} />
+              <Icon icon={faUser} />
               <Input 
                 type="text" 
-                placeholder="Email" 
+                placeholder="User Id" 
                 value={email} 
                 onChange={(e) => setEmail(e.target.value)}
                 required 
@@ -265,15 +297,7 @@ const LoginPage = () => {
             <Button type="submit">Sign In</Button>
           </form>
         </FormWrapper>
-        <SignUpPanel>
-          <TopText>
-            <h3>New Here?</h3>
-          </TopText>
-
-          <BottomText>
-            <p>Sign up and discover a great amount of new opportunities!</p>
-          </BottomText>
-        </SignUpPanel>
+       
       </PanelWrapper>
     </Container>
   );
