@@ -1,34 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { auth } from '../../config/config';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faFacebook, faGithub,faMailchimp } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faLock,faUser } from '@fortawesome/free-solid-svg-icons';
-import pulseLogo from '../../assets/pulse_logo.png'; // Adjust the path as necessary
-import Logo1 from '../../assets/Login/Logo11.png'
-import Logo2 from '../../assets/Login/Logo22.png'
-import Logo3 from '../../assets/Login/Logo33.png'
+import { faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons'; // Ensure these are the modern versions
+import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import pulseLogo from '../../assets/Login/LogoPulse.png'; // Adjust the path as necessary
+import Logo1 from '../../assets/Login/Logo11.png';
+import Logo2 from '../../assets/Login/Logo22.png';
+import Logo3 from '../../assets/Login/Logo33.png';
 
 
 import LoginCarosual from './LoginCarosual';
+
 const Logos = [Logo1, Logo2, Logo3];
-var index = 0;
-var logo = Logos[index];
+let index = 0;
+let logo = Logos[index];
 
 setInterval(() => {
   index = (index + 1) % Logos.length;
   logo = Logos[index];
-  console.log(index,logo);
-}, 2000);
+  console.log(index, logo);
+}, 3000);
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image:'../../assets/Login/LoginBG.png'; /* Light purple background */
+  background-image: url('../../assets/Login/LoginBGG.png'); 
 `;
 
 const PanelWrapper = styled.div`
@@ -54,10 +55,17 @@ const FormWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   color: #1F2937;
-  font-size:1rem;
+  font-size: 1rem;
   font-family: 'Roboto', sans-serif;
+`;
+
+const Logo = styled.img`
+  display: block;     
+  width: 100px;        
+  height: auto;        
+  margin: 0 auto 5px;
 `;
 
 const SocialButtonsContainer = styled.div`
@@ -84,7 +92,7 @@ const SocialButton = styled.button`
 `;
 
 const Divider = styled.div`
-color: black;
+  color: black;
   display: flex;
   align-items: center;
   margin: 20px 0;
@@ -139,12 +147,11 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-margin-top: 30px;
+  margin-top: 30px;
   padding: 12px 30px; /* Smaller width */
   margin-bottom: 12px;
   /* background-color: #4F46E5; Blue button */
   background: #2978D1;
-
   color: white;
   border: none;
   border-radius: 15px;
@@ -157,60 +164,7 @@ margin-top: 30px;
   }
 `;
 
-const StyledLink = styled(Link)`
-  display: block; /* Ensure block-level display for centering */
-  text-align: center;
-  color: #4F46E5;
-  text-decoration: none;
-  font-size: 14px;
-  margin-top: 8px;
 
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-// const SignUpPanel = styled.div`
-//   background: linear-gradient(135deg, #1D4ED8, #6366F1); /* Gradient background */
-//   background-image: url(${logo});
-//   background-size:contain;
-//   background-position: center;
-//   color: white;
-//   padding: 40px;
-//   border-radius: 0 8px 8px 0;
-//   text-align: center;
-
-//   /* max-width: ; */
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   flex-grow: 1; /* Ensure it grows to fill the space */
-//   position: relative;
-// `;
-
-const Overlay = styled.div`
-  border-radius: 8px;
-  text-align: center;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const TopText = styled.div`
-  position: absolute;
-  top: 20px;
-  text-align: center;
-  width: 100%;
-`;
-
-const BottomText = styled.div`
-  position: absolute;
-  bottom: 20px;
-  text-align: center;
-  width: 100%;
-`;
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -247,59 +201,46 @@ const LoginPage = () => {
     }
   };
 
-  return (
+  return (    
     <Container>
       <PanelWrapper>
-    <LoginCarosual/>
+        <LoginCarosual />
         <FormWrapper>
+          <Logo src={pulseLogo} alt="Pulse AI Logo" />
           <Title>Welcome to Pulse AI, Sign up or Login</Title>
-          <InputWrapper>
-          <Icon icon={faGoogle} />
-          <Input 
-                type="text" 
-                placeholder="Google" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)}
-                required 
-              />
-          </InputWrapper>
-          <InputWrapper>
-          <Icon icon={faEnvelope} />
-          <Input 
-                type="text" 
-                placeholder="Mail" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)}
-                required 
-              />
-          </InputWrapper>
-
+          <SocialButtonsContainer>
+            <SocialButton bgColor="#DB4437" onClick={handleGoogleLogin}>
+              <FontAwesomeIcon icon={faGoogle} />
+            </SocialButton>
+            <SocialButton bgColor="#333" onClick={handleGitLogin}>
+              <FontAwesomeIcon icon={faGithub} />
+            </SocialButton>
+          </SocialButtonsContainer>
           <Divider>OR</Divider>
           <form onSubmit={handleEmailLogin}>
             <InputWrapper>
               <Icon icon={faUser} />
-              <Input 
-                type="text" 
-                placeholder="User Id" 
-                value={email} 
+              <Input
+                type="text"
+                placeholder="User Id"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required 
+                required
               />
             </InputWrapper>
             <InputWrapper>
               <Icon icon={faLock} />
-              <Input 
-                type="password" 
-                placeholder="Password" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                required 
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </InputWrapper>
             <Button type="submit">Sign In</Button>
           </form>
         </FormWrapper>
-       
       </PanelWrapper>
     </Container>
   );

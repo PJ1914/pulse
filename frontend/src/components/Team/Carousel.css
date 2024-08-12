@@ -1,42 +1,14 @@
 .carousel-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0 auto;
   }
   
-  .carousel-wrapper {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    height: 60vh;
-    width: 100%; 
-    overflow-x: hidden; 
-    position: relative;
-  }
-  
-  .carousel-wrapper::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .carousel-wrapper {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .dev-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    height: 400px;
-    width: 300px;
-    margin: 10px;
-    flex: 0 0 auto;
-  }
+
   .dev-container.active .dev-img {
     transform: scale(1.2);
   }
@@ -47,39 +19,121 @@
     transition: transform 0.3s ease;
   }
   
-  .description {
-    background: #b78585;
-    height: 100%;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
-  
-  .name {
-    font-size: 22px;
-    text-transform: uppercase;
-  }
-  
   .role {
     font-size: 14px;
     color: black;
   }
   
-  .dev-dots {
-    display: flex;
-    justify-content: center; 
-    gap: 5px;
-    margin-top: 20px;
-  }
-  
   .dev-dot {
     font-size: 40px;
+    width: 30px; 
+    height: 5px; 
+    background-color: #fff;  
+    transition: background-color 0.3s ease;
     cursor: pointer;
-    transition: color 0.3s ease;
   }
   
   .dev-dot.active {
-    color: #B78585;
+    background-color: #B78585; 
   }
+
+  /* Main container for the entire Meet the Team section */
+
+
+/* Styling for the Meet the Team header */
+.meet-the-team-header {
+  color: #FFFFFF;
+  font-size: 48px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Container that wraps the carousel and allows smooth scrolling */
+.carousel-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* Ensures items are lined from the start */
+  align-items: center;
+  width: 80vw; /* or 100vw depending on how much width you want to cover */
+  overflow-x: scroll; /* Adjust if 'auto' is needed */
+  padding: 20px 0;
+  scroll-snap-type: x mandatory;
+}
+
+/* Individual developer container */
+.dev-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  height: 370px;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid #FFFFFF;
+  border-radius: 15px;
+  margin: 10px;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease;
+}
+
+.dev-container:hover {
+  transform: scale(1.1);
+}
+
+.description {
+  background: #b78585;
+  height: 120px; 
+  padding: 10px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.name, .role {
+  margin: 5px 0;
+}
+
+.name {
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+
+/* Navigation dots styled as rectangles */
+.dev-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dev-dot.active {
+  background-color: #B78585;
+}
+
+.carousel-wrapper::-webkit-scrollbar {
+  height: 0px; /* or '0' to make it invisible */
+}
+
+.carousel-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.carousel-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.carousel-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
   
   /* Media Queries */
   

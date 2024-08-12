@@ -1,44 +1,34 @@
 import React, { useRef, useEffect, useState } from "react";
-import "./Carousel.css";
+import "./Carousel.css"; // Ensure this is the correct path to your CSS file
 
 const Carousel = ({ items }) => {
   const wrapperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const scrollToDev = (index) => {
-    const wrapper = wrapperRef.current;
-    const devWidth = 300 + 20; 
-    wrapper.scrollTo({
-      left: index * devWidth,
+  const updateIndex = (newIndex) => {
+    setActiveIndex(newIndex);
+    const devWidth = wrapperRef.current.firstChild.offsetWidth + 20; // 20 is margin
+    wrapperRef.current.scrollTo({
+      left: newIndex * devWidth,
       behavior: "smooth",
     });
   };
 
-  const updateIndex = (newIndex) => {
-    const totalItems = items.length;
-    const index = (newIndex + totalItems) % totalItems; 
-    setActiveIndex(index);
-    scrollToDev(index);
-  };
-
   useEffect(() => {
     const interval = setInterval(() => {
-      updateIndex(activeIndex + 1);
-    }, 3000); 
-
+      updateIndex((activeIndex + 1) % items.length);
+    }, 3000);
     return () => clearInterval(interval);
-  }, [activeIndex]);
-
-  // Determine which developers to show
-  const visibleItems = items.slice(activeIndex, activeIndex + 3).concat(items.slice(0, Math.max(0, activeIndex + 3 - items.length)));
+  }, [activeIndex, items.length]);
 
   return (
     <div className="carousel-main">
       <div className="carousel-wrapper" ref={wrapperRef}>
-        {visibleItems.map((item, ind) => (
+        {items.map((item, index) => (
           <div
-            className={`dev-container ${ind === 1 ? "active" : ""}`} 
-            key={ind}
+            className={`dev-container ${index === activeIndex ? "active" : ""}`}
+            key={index}
+            onClick={() => updateIndex(index)}
           >
             <img className="dev-img" src={item.img} alt={item.name} />
             <div className="description">
@@ -49,14 +39,12 @@ const Carousel = ({ items }) => {
         ))}
       </div>
       <div className="dev-dots">
-        {items.map((_, ind) => (
+        {items.map((_, index) => (
           <div
-            className={`dev-dot ${activeIndex === ind ? "active" : ""}`}
-            key={ind}
-            onClick={() => updateIndex(ind)}
-          >
-            .
-          </div>
+            className={`dev-dot ${index === activeIndex ? "active" : ""}`}
+            key={index}
+            onClick={() => updateIndex(index)}
+          />
         ))}
       </div>
     </div>

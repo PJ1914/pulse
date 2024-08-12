@@ -160,7 +160,7 @@ const Main = () => {
             <div className='logoDesign'>
               <img src={logo} alt='logo' />
               <Typography variant='h6' component='div' align='center'>
-                Pulse Dashboard
+                Pulse AI
               </Typography>
             </div>
             <Box ml='auto'>

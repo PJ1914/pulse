@@ -1,11 +1,13 @@
 .devs-main {
   height: 100vh;
-  max-width: 100vw;
-  background-image: url("../../assets/main page/My Team Img.png ");
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: url('../../assets/main page/My Team Img.png') no-repeat center center;
+  background-size: cover;
 }
+
 .devs-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -61,8 +63,10 @@
 .meet-the-team-header {
   display: flex;
   justify-content: center;
-  align-items: baseline;
-  margin-bottom: 20px;
+  align-items: flex-start; 
+  width: 100%; 
+  margin-top: 20px; 
+  padding-top: 20px;
 }
 
 .meet-word, .the-word, .team-word {
