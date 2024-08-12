@@ -17,7 +17,7 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/pulseai" element={<PulseAni />} />
+                <Route path="/" element={<PulseAni />} />
                 <Route path="/main" element={<Main />} />
                 <Route path="/messages" element={<ProtectedRoute>
                         <Messages/>
