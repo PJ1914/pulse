@@ -1,0 +1,87 @@
+{
+  "name": "pulse-react",
+  "homepage": "https://PJ1914.github.io/pulseai-copy",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@google/generative-ai": "^0.12.0",
+    "@mui/icons-material": "^5.15.19",
+    "@mui/material": "^5.15.20",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "@react-three/xr": "^5.7.1",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "animate.css": "^4.1.1",
+    "axios": "^1.7.2",
+    "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
+    "file-loader": "^6.2.0",
+    "firebase": "^10.12.2",
+    "react": "^18.3.1",
+    "react-bootstrap": "^2.10.4",
+    "react-dom": "^18.3.1",
+    "react-dropzone": "^14.2.3",
+    "react-icons": "^5.2.1",
+    "react-markdown": "^9.0.1",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.23.1",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.30.2",
+    "react-speech-recognition": "^3.10.0",
+    "react-toastify": "^10.0.5",
+    "remark-gfm": "^4.0.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.12",
+    "three": "^0.165.0",
+    "three-stdlib": "^2.30.3",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@mui/material": "^5.0.0",
+    "@types/three": "^0.165.0",
+    "customize-cra": "^1.0.0",
+    "firebase": "^9.0.0",
+    "gh-pages": "^6.1.1",
+    "react": "^18.0.0",
+    "react-app-rewired": "^2.2.1",
+    "react-dom": "^18.0.0",
+    "react-firebase-hooks": "^5.0.3",
+    "rimraf": "^5.0.1"
+  }
+}

@@ -1,0 +1,18 @@
+.main-wrapper{
+    display: flex;
+    justify-content: center;
+    background: url('../../assets/main page/My Team Img.png') no-repeat center center;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+.pulse-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

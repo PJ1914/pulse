@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.about-wrapper {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+    align-items: center;
+    padding: 10%;
+    background-image: url("../../assets/main page/background.png");
+    background-position: 100%;
+}
+
+.about-section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    text-align: left;
+    color: white;
+    padding: 5%;
+    height: 100%;
+    width: 50%;
+    background: transparent;
+    position: relative;
+    border: 1px solid #58B0E0;
+    border-radius: 3%;
+}
+
+.tree {
+    height: 95%;
+    z-index: 1;
+    position: absolute;
+    padding-right: 10px;
+    animation: sway 5s infinite alternate ease-in-out;
+}
+
+@keyframes sway {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(3deg); }
+}
+
+.right {
+    width: 50%;
+    position: relative;
+}
+
+.about-image {
+    height: 440px;
+    width: 100%;
+    object-fit: fill;
+    background-color: transparent;
+    border-radius: 3%;
+    position: relative;
+    z-index: 1;
+    transition: opacity 1s ease-in-out; /* Smooth transition for carousel */
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    z-index: 2;
+}
+
+.dot {
+    font-size: 30px;
+    margin: 0 3px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.dot:hover {
+    transform: scale(1.5);
+}
+
+.about-h1 {
+    text-align: left;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 40px;
+    z-index: 10;
+    position: relative;
+}
+
+.arrow {
+    height: 1px;
+    border: 2px solid #58B0E0;
+    width: 30%;
+    margin-bottom: 3%;
+    z-index: 10;
+    position: relative;
+    animation: expandArrow 2s infinite;
+}
+
+@keyframes expandArrow {
+    0%, 100% { width: 30%; }
+    50% { width: 100%; }
+}
+
+.about-p {
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    z-index: 1;
+    position: relative;
+}
+
+/* Media Queries */
+
+/* Mobile Devices - 320px to 480px */
+@media (max-width: 480px) {
+  .about-wrapper {
+      flex-direction: column;
+      padding: 5%;
+  }
+
+  .about-section {
+      width: 90%;
+      padding: 10%;
+      border-radius: 5%;
+  }
+
+  .tree {
+      height: 70%;
+      padding-right: 5px;
+  }
+
+  .right {
+      width: 100%;
+  }
+
+  .about-image {
+      height: 250px;
+      width: 100%;
+  }
+
+  .dots {
+      bottom: 10px;
+  }
+
+  .dot {
+      font-size: 20px;
+  }
+
+  .about-h1 {
+      font-size: 24px;
+      line-height: 32px;
+  }
+
+  .arrow {
+      width: 50%;
+  }
+
+  .about-p {
+      font-size: 10px;
+      line-height: 18px;
+  }
+}
+
+/* Tablets - 481px to 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+  .about-wrapper {
+      flex-direction: column;
+      padding: 7%;
+  }
+
+  .about-section {
+      width: 100%;
+      padding: 8%;
+      border-radius: 4%;
+  }
+
+  .tree {
+      height: 85%;
+      padding-right: 7px;
+  }
+
+  .right {
+      width: 100%;
+  }
+
+  .about-image {
+      height: 350px;
+      width: 100%;
+  }
+
+  .dots {
+      bottom: 12px;
+  }
+
+  .dot {
+      font-size: 25px;
+  }
+
+  .about-h1 {
+      font-size: 35px;
+  }
+
+  .arrow {
+      width: 40%;
+  }
+
+  .about-p {
+      font-size: 25px;
+      line-height: 40px;
+  }
+}
