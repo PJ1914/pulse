@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Logo1 from '../../assets/Login/Logo1.png'
-import Logo2 from '../../assets/Login/Logo2.png'
-import Logo3 from '../../assets/Login/Logo3.png'
+import Logo1 from '../../assets/Login/Logo11.png'
+import Logo2 from '../../assets/Login/Logo22.png'
+import Logo3 from '../../assets/Login/Logo33.png'
 
 const Logos = [Logo1, Logo2, Logo3];
 

@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook, faGithub,faMailchimp } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faLock,faUser } from '@fortawesome/free-solid-svg-icons';
 import pulseLogo from '../../assets/pulse_logo.png'; // Adjust the path as necessary
-import Logo1 from '../../assets/Login/Logo1.png'
-import Logo2 from '../../assets/Login/Logo2.png'
-import Logo3 from '../../assets/Login/Logo3.png'
+import Logo1 from '../../assets/Login/Logo11.png'
+import Logo2 from '../../assets/Login/Logo22.png'
+import Logo3 from '../../assets/Login/Logo33.png'
 
 
 import LoginCarosual from './LoginCarosual';
