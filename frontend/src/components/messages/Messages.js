@@ -1,4 +1,3 @@
-// Messages.js
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import "./Messages.css";
 import axios from "axios";
@@ -22,9 +21,8 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Gallery from "./Gallery";
 import Mic from "./Mic";
-// import ThreeBodyLoader from "./ThreeBodyLoader";
+import ThreeBodyLoader from "./ThreeBodyLoader";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-// import History from "./Sidebar"
 
 // Messages component
 export default function Messages() {
@@ -35,7 +33,7 @@ export default function Messages() {
   const [user, setUser] = useState(null);
   const [contentCopyId, setContentCopyId] = useState([]);
   const inputRef = useRef(null);
-  const messagesContainerRef = useRef(null); 
+  const messagesContainerRef = useRef(null);
 
   const handleCopy = useCallback((id, content) => {
     navigator.clipboard.writeText(content);
@@ -58,11 +56,14 @@ export default function Messages() {
           orderBy("createdAt", "asc"),
           where("userId", "==", user.uid)
         );
-        const unsubscribeMessages = onSnapshot(messagesQuery, (querySnapshot) => {
-          setMessages(
-            querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-          );
-        });
+        const unsubscribeMessages = onSnapshot(
+          messagesQuery,
+          (querySnapshot) => {
+            setMessages(
+              querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+            );
+          }
+        );
         return unsubscribeMessages;
       } else {
         setUser(null);
@@ -75,7 +76,8 @@ export default function Messages() {
   // Effect for auto-scrolling
   useEffect(() => {
     if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+      messagesContainerRef.current.scrollTop =
+        messagesContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -91,37 +93,41 @@ export default function Messages() {
     },
     [user]
   );
-  
+
   const action = useCallback(async () => {
     if (!prompt || !user) {
       toast.error("Enter a prompt and ensure you're logged in");
       return;
     }
-  
+
     setLoading(true);
-  
+
     try {
       // Prepare chat history
-      const chatHistory = messages.map(msg => ({
+      const chatHistory = messages.map((msg) => ({
         role: msg.role,
-        parts: [msg.content]
+        parts: [msg.content],
       }));
-  
-      const response = await axios.post(process.env.REACT_APP_GEMINI_URL, {
-        message: prompt,
-        chatHistory: chatHistory
-      });
-  
+
+      const response = await axios.post(
+        process.env.REACT_APP_GEMINI_URL,
+        {
+          message: prompt,
+          chatHistory: chatHistory,
+        }
+      );
+
       if (response.status === 200) {
         const botMessage = { content: response.data.response, role: "model" };
-        setMessages((prevMessages) => [...prevMessages, 
+        setMessages((prevMessages) => [
+          ...prevMessages,
           { content: prompt, role: "user" },
-          botMessage
+          botMessage,
         ]);
-  
+
         await sendMessage(prompt);
         await sendMessage(botMessage.content, "model");
-  
+
         setPrompt("");
         inputRef.current.value = "";
       } else {
@@ -135,13 +141,36 @@ export default function Messages() {
     }
   }, [prompt, user, messages, sendMessage]);
 
-  const handleFileSelect = (file) => {
-    const fileUrl = URL.createObjectURL(file);
+  const handleFileSelect = async (file) => {
     const fileType = file.type;
-    const userMessage = { content: fileUrl, role: "user", type: fileType };
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_IMAGE_RECOGNITION_URL}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const userMessage = {
+        content: response.data.labels.join(", "),
+        role: "user",
+        type: fileType,
+      };
+      setMessages((prevMessages) => [...prevMessages, userMessage]);
+    } catch (error) {
+      console.error("Error with image recognition:", error);
+      toast.error("Error occurred during image recognition");
+    }
   };
 
+  // Ensure handleVoiceResult is defined here
   const handleVoiceResult = (text) => {
     setPrompt(text);
     action();
@@ -181,7 +210,7 @@ export default function Messages() {
           inputRef={inputRef}
           onSend={action}
           onFileSelect={handleFileSelect}
-          onVoiceResult={handleVoiceResult}
+          onVoiceResult={handleVoiceResult} // Pass the function here
         />
       </div>
       <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
@@ -217,14 +246,20 @@ const MessageList = ({ messages, onCopy, copiedIds }) => (
 
 // Message component
 const Message = ({ message, isCopied, onCopy }) => (
-  <div className={`message ${message.role === "user" ? "message-user" : "message-model"}`}>
+  <div
+    className={`message ${
+      message.role === "user" ? "message-user" : "message-model"
+    }`}
+  >
     {message.role !== "user" && (
       <p className="CopyContent" onClick={onCopy}>
         {isCopied ? <CheckBoxIcon /> : <ContentCopyIcon />}
       </p>
     )}
     {message.role === "model" ? (
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        {message.content}
+      </ReactMarkdown>
     ) : message.type ? (
       message.type.startsWith("image/") ? (
         <img src={message.content} alt="User content" />
