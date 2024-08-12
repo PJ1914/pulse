@@ -11,8 +11,19 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 50vh;
-  width: 90vw;
+  height: 60vh;
+  width: 63vw;
+  overflow-x: scroll; 
+  scroll-snap-type: x mandatory; 
+}
+
+.devs-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.devs-wrapper {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
 }
 
 .dev-container {
