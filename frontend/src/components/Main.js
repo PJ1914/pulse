@@ -67,7 +67,7 @@ const darkTheme = createTheme({
 
 const Main = () => {
   const nav = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
   const [email, setEmail] = useState('');

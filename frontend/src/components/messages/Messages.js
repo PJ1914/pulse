@@ -21,7 +21,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Gallery from "./Gallery";
 import Mic from "./Mic";
-import ThreeBodyLoader from "./ThreeBodyLoader";
+// import ThreeBodyLoader from "./ThreeBodyLoader";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 // Messages component
@@ -33,6 +33,7 @@ export default function Messages() {
   const [user, setUser] = useState(null);
   const [contentCopyId, setContentCopyId] = useState([]);
   const inputRef = useRef(null);
+  
   const messagesContainerRef = useRef(null);
 
   const handleCopy = useCallback((id, content) => {
@@ -45,6 +46,7 @@ export default function Messages() {
   }, []);
 
   useEffect(() => {
+    inputRef.current.focus();
     document.body.classList.toggle("dark-mode", theme === "dark");
     localStorage.setItem("theme", theme);
 
@@ -182,7 +184,7 @@ export default function Messages() {
 
   return (
     <>
-      <div className={`container`}>
+      <div className={`container`} style={{width:"100vw"}}>
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -313,7 +315,7 @@ const MessageInput = ({
         <textarea
           ref={inputRef}
           className="textarea"
-          placeholder="Type your message..."
+          placeholder="Chat with Pulse AI"
           value={prompt}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
@@ -338,7 +340,11 @@ const MessageInput = ({
 
 // ThemeToggle component
 const ThemeToggle = ({ theme, toggleTheme }) => (
-  <button className="ModeCard" onClick={toggleTheme}>
-    {theme === "light" ? <BsMoon size={24} /> : <BsSun size={24} />}
-  </button>
+  <button 
+  className="ModeCard" 
+  style={{ backgroundColor: theme === "light" ? "#333" : "white" }} 
+  onClick={toggleTheme}
+>
+  {theme === "light" ? <BsMoon color="white" size={24} /> : <BsSun color="#333" size={24} />}
+</button>
 );
