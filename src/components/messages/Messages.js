@@ -181,7 +181,11 @@ export default function Messages() {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
+  const [rotate,setRotate]=useState(false)
+const handleSettings=()=>{
+  setRotate(true)
 
+}
   return (
     <>
       <div className={`container`} style={{width:"100vw"}}>
@@ -221,12 +225,18 @@ export default function Messages() {
 }
 
 // Header component
+// const [rotate,setRotate]=useState()
+const handleSettings=()=>{
+  console.log('clicked')
+  
+}
 const Header = () => (
+ 
   <header className="header">
     <div className="header-title">
       <h1>Pulse AI Chatbot</h1>
     </div>
-    <button className="settings-toggle">
+    <button className={`settings-toggle rotate `} onClick={handleSettings}>
       <IoSettingsOutline size={24} />
     </button>
   </header>
