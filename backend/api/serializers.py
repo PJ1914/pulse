@@ -1,10 +1,16 @@
-# api/serializers.py
 from rest_framework import serializers
-from .models import Message
 
-class MessageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Message
-        fields = '__all__'
 class GeminiSerializer(serializers.Serializer):
     message = serializers.CharField()
+    chatHistory = serializers.ListField(
+        child=serializers.DictField(), 
+        required=False
+    )
+    image = serializers.ImageField(
+        required=False, 
+        allow_null=True
+    )
+    audio = serializers.FileField(
+        required=False, 
+        allow_null=True
+    )
