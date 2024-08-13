@@ -1,0 +1,89 @@
+.devs-main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('../../assets/main page/My Team Img.png') no-repeat center center;
+  background-size: cover;
+}
+
+.devs-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  width: 63vw;
+  overflow-x: scroll; 
+  scroll-snap-type: x mandatory; 
+}
+
+.devs-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.devs-wrapper {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+
+.dev-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  height: 370px;
+  width: 300px;
+  background: #ffffff33;
+  border: 1px solid #ffffff;
+  border-radius: 15px;
+  margin: 10px;
+}
+.dev-img {
+  height: 250px;
+  width: 100%;
+}
+.description {
+  background: #b78585;
+  height: 100%;
+  border-bottom-left-radius:15px ;
+  border-bottom-right-radius:15px ;
+}
+.name {
+  font-size: 22px;
+  text-transform: uppercase;
+}
+.role {
+  font-size: 14px;
+  color: black;
+}
+
+.meet-the-team-header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  width: 100%; 
+  margin-top: 20px; 
+  padding-top: 20px;
+}
+
+.meet-word, .the-word, .team-word {
+  color: #F0EFEF;
+  font-family: 'The Bold Font', sans-serif; /* Ensure this matches your CDN import */
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.meet-word, .team-word {
+  font-size: 80px;
+  line-height: 96px;
+}
+
+.the-word {
+  padding-top: 2%;
+  font-size: 50px;
+  line-height: 60px;
+}
+

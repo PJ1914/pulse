@@ -1,0 +1,57 @@
+/* src/components/PulseAni.css */
+.pulse-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.pulse-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.pulse-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.pulse-link {
+    text-decoration: none;
+}
+
+.pulse-title {
+    font-size: 5rem;
+    /*font-weight: bold;*/
+    color: transparent;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(125, 53, 219, 0.7));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -text-fill-color: transparent;
+    animation: name duration timing-function delay iteration-count direction fill-mode;
+    text-shadow: 0 0 20px rgba(161, 71, 218, 0.5), 0 0 40px rgba(59, 31, 70, 0.5);
+    cursor: pointer;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.5);
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.7), 0 0 60px rgba(255, 255, 255, 0.7);
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}

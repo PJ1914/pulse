@@ -1,0 +1,26 @@
+/* Mic.css */
+.mic {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mic-button {
+    background-color: #5d3fd3;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mic-button:hover {
+    background-color: #4725a8;
+  }
+  
+  .mic-button:active {
+    background-color: #321a7d;
+  }
+  
