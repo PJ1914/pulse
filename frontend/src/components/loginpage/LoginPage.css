@@ -1,0 +1,195 @@
+/* LoginPage.css */
+
+/* Default styles (applied to all screen sizes) */
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../../assets/Login/LoginBGG.png');
+}
+
+.PanelWrapper {
+  display: flex;
+  width: 100%;
+  max-width: 80%;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.FormWrapper {
+  background: white;
+  padding: 40px;
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.Title {
+  margin-bottom: 50px;
+  color: #1f2937;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.Logo {
+  display: block;
+  width: 100px;
+  height: auto;
+  margin: 0 auto 5px;
+}
+
+.SocialButtonsContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.SocialButton {
+  background-color: var(--bgColor);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.SocialButton:hover {
+  opacity: 0.9;
+}
+
+.Divider {
+  color: black;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.Divider::before,
+.Divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.Divider::before {
+  margin-right: 10px;
+}
+
+.Divider::after {
+  margin-left: 10px;
+}
+
+.InputWrapper {
+  position: relative;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.Icon {
+  position: absolute;
+  top: 50%;
+  left: 35px;
+  transform: translateY(-50%);
+  color: black;
+}
+
+.Input {
+  width: 85%;
+  padding: 12px 12px 12px 40px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  color: #1f2937;
+  background-color: #f3f4f6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.Input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #6366f1;
+}
+
+.Button {
+  margin-top: 30px;
+  padding: 12px 30px;
+  margin-bottom: 12px;
+  background: #2978d1;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Button:hover {
+  background-color: #6366f1;
+}
+
+/* Media Queries */
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (max-width: 600px) {
+  .PanelWrapper {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .FormWrapper {
+    padding: 3px;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 100%;
+  }
+
+  .SocialButtonsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .SocialButton {
+    margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .Input {
+    width: 100%;
+  }
+
+  .Button {
+    width: 60%;
+    padding: 12px 0;
+  }
+
+  .Icon{
+    left: 15px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media (max-width: 768px) {
+  .PanelWrapper {
+    max-width: 90%;
+  }
+}
+
+/* Large devices (laptops/desktops, 1024px and up) */
+@media (max-width: 1024px) {
+  .FormWrapper {
+    max-width: 500px;
+  }
+}

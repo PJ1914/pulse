@@ -450,9 +450,7 @@ body.dark-mode .textarea::-webkit-scrollbar-thumb:hover {
   height: 100%;
   width: 30%;
 }
-body.dark-mode .search{
-  background-color: transparent;
-}
+
 .three-body__dot:after {
   content: "";
   position: absolute;

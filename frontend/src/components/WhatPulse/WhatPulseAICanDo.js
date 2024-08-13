@@ -1,6 +1,8 @@
 import React from "react";
 import BackgroundImg from "../../assets/main page/background.png";
 import Icon from "./Icon";
+import ExploreAIIntelligence from "./ExploreAIIntelligence";
+import "./WhatPulseAICanDo.css"; // Import the CSS file
 
 const WhatPulseAiCanDo = () => {
   return (
@@ -14,7 +16,8 @@ const WhatPulseAiCanDo = () => {
         backgroundRepeat: "no-repeat", // Do not repeat the image
         padding: "20px", // Add some padding if necessary
         position: "relative",
-      }}>
+      }}
+    >
       <div style={{ position: "absolute", left: "3%", paddingTop: "2%" }}>
         <span
           style={{
@@ -24,7 +27,8 @@ const WhatPulseAiCanDo = () => {
             fontWeight: 700,
             lineHeight: "43.20px",
             wordWrap: "break-word",
-          }}>
+          }}
+        >
           WHAT
         </span>
         <span
@@ -35,7 +39,8 @@ const WhatPulseAiCanDo = () => {
             fontWeight: 700,
             lineHeight: "48px",
             wordWrap: "break-word",
-          }}>
+          }}
+        >
           {" "}
           PULSE AI
         </span>
@@ -47,7 +52,8 @@ const WhatPulseAiCanDo = () => {
             fontWeight: 700,
             lineHeight: "43.20px",
             wordWrap: "break-word",
-          }}>
+          }}
+        >
           {" "}
         </span>
         <span
@@ -58,7 +64,8 @@ const WhatPulseAiCanDo = () => {
             fontWeight: 700,
             lineHeight: "43.20px",
             wordWrap: "break-word",
-          }}>
+          }}
+        >
           CAN DO
         </span>
       </div>
@@ -78,13 +85,9 @@ const WhatPulseAiCanDo = () => {
           wordWrap: "break-word",
           marginTop: "20px",
           padding: "10px",
-        }}>
-        AI Chatbot: Engage with our AI chatbot for real-time answers,
-        assistance, and information. It's like having a personal assistant at
-        your fingertips. Custom Widgets: Tailor your Pulse AI dashboard with
-        widgets that suit your needs, from weather updates to news feeds and
-        more. Easy Integration: Seamlessly connect Pulse AI with your existing
-        systems and platforms for a cohesive, unified experience.
+        }}
+      >
+        AI Chatbot: Engage with our AI chatbot for real-time answers, assistance, and information. It's like having a personal assistant at your fingertips. Custom Widgets: Tailor your Pulse AI dashboard with widgets that suit your needs, from weather updates to news feeds and more. Easy Integration: Seamlessly connect Pulse AI with your existing systems and platforms for a cohesive, unified experience.
       </div>{" "}
       <div style={{ position: "absolute", left: "3%", paddingTop: "2%" }}>
         <span
@@ -95,7 +98,8 @@ const WhatPulseAiCanDo = () => {
             fontWeight: 700,
             lineHeight: "43.20px",
             wordWrap: "break-word",
-          }}>
+          }}
+        >
           Discover
         </span>
         <span
@@ -106,7 +110,8 @@ const WhatPulseAiCanDo = () => {
             fontWeight: 700,
             lineHeight: "48px",
             wordWrap: "break-word",
-          }}>
+          }}
+        >
           {" "}
           PULSE AI
         </span>
@@ -118,7 +123,8 @@ const WhatPulseAiCanDo = () => {
             fontWeight: 700,
             lineHeight: "43.20px",
             wordWrap: "break-word",
-          }}>
+          }}
+        >
           {" "}
         </span>
         <span
@@ -129,7 +135,8 @@ const WhatPulseAiCanDo = () => {
             fontWeight: 700,
             lineHeight: "43.20px",
             wordWrap: "break-word",
-          }}>
+          }}
+        >
           Intelligence
         </span>
       </div>
@@ -224,6 +231,7 @@ const WhatPulseAiCanDo = () => {
         assist you and a deeper look into Pulse Al Intelligence where innovation
         and interaction come together.
       </div>
+        <ExploreAIIntelligence />
     </div>
   );
 };
