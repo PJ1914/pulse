@@ -107,17 +107,24 @@
 /* Media Queries */
 
 /* Mobile Devices - 320px to 480px */
-@media (max-width: 480px) {
+@media (max-width: 769px) {
   .carousel-main {
     padding: 5%;
     height: auto;
   }
-
   .carousel-wrapper {
-    height: 80vh;
-    width: 95vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 72vw;
+    overflow-x: hidden;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    flex-wrap: nowrap;
   }
-
+  
+ 
   .dev-container {
     height: 350px;
     width: 260px;
@@ -142,7 +149,7 @@
 }
 
 /* Tablets - 481px to 768px */
-@media (min-width: 481px) and (max-width: 768px) {
+@media (min-width: 770px) and (max-width: 1000px) {
   .carousel-main {
     padding: 5%;
     height: auto;
@@ -150,7 +157,7 @@
 
   .carousel-wrapper {
     height: 55vh;
-    width: 90vw;
+    width: 76vw;
   }
 
   .dev-container {
