@@ -19,7 +19,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "#999999",
-            fontSize: 36,
+            fontSize: '90%',
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "43.20px",
@@ -30,7 +30,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "white",
-            fontSize: 40,
+            fontSize: '90%',
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "48px",
@@ -42,7 +42,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "white",
-            fontSize: 36,
+            fontSize:'90%' ,
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "43.20px",
@@ -53,7 +53,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "#999999",
-            fontSize: 36,
+            fontSize: '90%',
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "43.20px",
@@ -68,10 +68,10 @@ const WhatPulseAiCanDo = () => {
           position: "absolute",
           left: "3%",
           top: "12%",
-          width: "1378px",
+          width: "90%",
           height: "178px",
           color: "#E9E9E9",
-          fontSize: "24px",
+          fontSize: "60%",
           fontFamily: "Arial",
           fontWeight: "700",
           lineHeight: "28.80px",
@@ -90,7 +90,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "#999999",
-            fontSize: 36,
+            fontSize: "90%",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "43.20px",
@@ -101,7 +101,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "white",
-            fontSize: 40,
+            fontSize: "90%",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "48px",
@@ -113,7 +113,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "white",
-            fontSize: 36,
+            fontSize: "90%",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "43.20px",
@@ -124,7 +124,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "#999999",
-            fontSize: 36,
+            fontSize: "90%",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "43.20px",
@@ -139,10 +139,10 @@ const WhatPulseAiCanDo = () => {
           position: "absolute",
           left: "3%",
           top: "45%",
-          width: "1378px",
+          width: "90%",
           height: "178px",
           color: "#E9E9E9",
-          fontSize: "24px",
+          fontSize: "60%",
           fontFamily: "Arial",
           fontWeight: "700",
           lineHeight: "28.80px",
@@ -159,7 +159,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "#999999",
-            fontSize: 36,
+            fontSize: "90%",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "43.20px",
@@ -170,7 +170,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "white",
-            fontSize: 40,
+            fontSize: "90%",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "48px",
@@ -182,7 +182,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "white",
-            fontSize: 36,
+            fontSize: "90%",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "43.20px",
@@ -193,7 +193,7 @@ const WhatPulseAiCanDo = () => {
         <span
           style={{
             color: "#999999",
-            fontSize: 36,
+            fontSize: "90%",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
             lineHeight: "43.20px",
@@ -208,10 +208,10 @@ const WhatPulseAiCanDo = () => {
           position: "absolute",
           left: "3%",
           top: "80%",
-          width: "1378px",
+          width: "90%",
           height: "178px",
           color: "#E9E9E9",
-          fontSize: "24px",
+          fontSize: "60%",
           fontFamily: "Arial",
           fontWeight: "700",
           lineHeight: "28.80px",
