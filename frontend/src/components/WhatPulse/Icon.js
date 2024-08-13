@@ -1,11 +1,14 @@
 // import * as React from "react";
+import React from "react";
+import './Icon.css'; // Import the CSS file
+
 const Icon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={1478}
     height={305}
     fill="none"
-    style={{position:"relative",marginBottom:"5%"}}
+    className="icon" // Apply the class
     {...props}
   >
     <path
@@ -14,4 +17,5 @@ const Icon = (props) => (
     />
   </svg>
 );
+
 export default Icon;
