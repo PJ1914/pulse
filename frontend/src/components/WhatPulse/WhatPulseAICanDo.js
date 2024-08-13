@@ -156,80 +156,9 @@ const WhatPulseAiCanDo = () => {
           wordWrap: "break-word",
           marginTop: "20px",
           padding: "10px",
-        }}>
-        Dive into Pulse Al Intelligence for advanced data analysis and smart
-        technology solutions. Personalize your experience with interactive
-        buttons and icons, making it easy to get exactly what you need from the
-        platform.
-      </div>
-      <div style={{ position: "absolute", left: "3%", paddingTop: "2%" }}>
-        <span
-          style={{
-            color: "#999999",
-            fontSize: "90%",
-            fontFamily: "MADE Tommy Soft",
-            fontWeight: 700,
-            lineHeight: "43.20px",
-            wordWrap: "break-word",
-          }}>
-          Explore
-        </span>
-        <span
-          style={{
-            color: "white",
-            fontSize: "90%",
-            fontFamily: "MADE Tommy Soft",
-            fontWeight: 700,
-            lineHeight: "48px",
-            wordWrap: "break-word",
-          }}>
-          {" "}
-          PULSE AI
-        </span>
-        <span
-          style={{
-            color: "white",
-            fontSize: "90%",
-            fontFamily: "MADE Tommy Soft",
-            fontWeight: 700,
-            lineHeight: "43.20px",
-            wordWrap: "break-word",
-          }}>
-          {" "}
-        </span>
-        <span
-          style={{
-            color: "#999999",
-            fontSize: "90%",
-            fontFamily: "MADE Tommy Soft",
-            fontWeight: 700,
-            lineHeight: "43.20px",
-            wordWrap: "break-word",
-          }}>
-          Intelligence
-        </span>
-      </div>
-      <Icon />
-      <div
-        style={{
-          position: "absolute",
-          left: "3%",
-          top: "80%",
-          width: "90%",
-          height: "178px",
-          color: "#E9E9E9",
-          fontSize: "60%",
-          fontFamily: "Arial",
-          fontWeight: "700",
-          lineHeight: "28.80px",
-          wordWrap: "break-word",
-          marginTop: "20px",
-          padding: "10px",
-        }}>
-        Scroll down to explore the technology behind Pulse Al and meet the team
-        making it happen. Along the way, you'll find our Al chatbot ready to
-        assist you and a deeper look into Pulse Al Intelligence where innovation
-        and interaction come together.
+        }}
+      >
+        Dive into Pulse AI Intelligence for advanced data analysis and smart technology solutions. Personalize your experience with interactive buttons and icons, making it easy to get exactly what you need from the platform.
       </div>
         <ExploreAIIntelligence />
     </div>
