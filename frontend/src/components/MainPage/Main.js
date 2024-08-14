@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   AppBar,
@@ -13,17 +13,19 @@ import {
   ThemeProvider,
   createTheme,
 } from '@mui/material';
-import logo from '../assets/pulse_logo.png';
-import backgroundImage from '../assets/main page/backgroundimg.png';
-import MeetTheTeam from './Team/MeetTheTeam';
-import robotHandImage from '../assets/main page/htggdjhdfg 1.png';
-import circuitOverlay from '../assets/main page/surface.png';
-import blackOverlay from '../assets/main page/Rectangle 12.png';
-import AboutUs from './About-us/AboutUs';
+import { Person } from '@mui/icons-material'; // Import the Person icon
+import { auth, onAuthStateChanged, signOut } from '../../config/config'; // Import Firebase functions
+import logo from '../../assets/pulse_logo.png';
+import backgroundImage from '../../assets/main page/backgroundimg.png';
+import MeetTheTeam from '../Team/MeetTheTeam';
+import robotHandImage from '../../assets/main page/htggdjhdfg 1.png';
+import circuitOverlay from '../../assets/main page/surface.png';
+import blackOverlay from '../../assets/main page/Rectangle 12.png';
+import AboutUs from '../About-us/AboutUs';
 import './Main.css';
-import Footer from './CopyRights/Footer';
-import WhatPulseAiCanDo from './WhatPulse/WhatPulseAICanDo';
-import TryPulse from './PulseComp/TryPulse';
+import Footer from '../CopyRights/Footer';
+import WhatPulseAiCanDo from '../WhatPulse/WhatPulseAICanDo';
+import TryPulse from '../PulseComp/TryPulse';
 
 const darkTheme = createTheme({
   palette: {
@@ -51,13 +53,26 @@ const darkTheme = createTheme({
 
 const Main = () => {
   const nav = useNavigate();
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup subscription on unmount
+  }, []);
+
   const logOut = () => {
-    setUser(null);
-    console.log('Logged out successfully.');
-    nav('/login');
+    signOut(auth).then(() => {
+      console.log('Logged out successfully.');
+      nav('/login');
+    });
   };
 
   const handleMenu = (event) => {
@@ -90,11 +105,12 @@ const Main = () => {
               ) : (
                 <>
                   <Avatar
-                    alt={user.email}
                     onClick={handleMenu}
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer', backgroundColor: user.photoURL ? 'transparent' : '#2196f3' }}
+                    src={user.photoURL || undefined} // Use the user's photoURL if available
+                    alt={user.displayName || user.email} // Fallback to email if displayName isn't available
                   >
-                    {user.email[0].toUpperCase()}
+                    {!user.photoURL && <Person />} {/* Display icon if no photoURL */}
                   </Avatar>
                   <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
                     <MenuItem onClick={handleClose} component={Link} to='/profile'>
@@ -145,7 +161,7 @@ const Main = () => {
         <AboutUs />
         <MeetTheTeam />
         <WhatPulseAiCanDo />
-        <TryPulse/>
+        <TryPulse />
         <Footer />
       </div>
     </ThemeProvider>
