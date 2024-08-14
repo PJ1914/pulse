@@ -1,32 +1,35 @@
 import React from "react";
 import "./TryPulse.css";
-import styled from "styled-components";
-import icon1 from "../../assets/Pulse-icons/Vector.png";
-import icon2 from "../../assets/Pulse-icons/Vector2.png";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import styled from 'styled-components';
+import icon1 from "../../assets/Pulse-icons/Vector.png"
+import icon2 from "../../assets/Pulse-icons/Vector2.png"
+// import icon2 from "../../assets/Pulse-icons/image 7 (1).png" 
+import { faRobot } from '@fortawesome/free-solid-svg-icons';
+import ExploreAIIntelligence from "../WhatPulse/ExploreAIIntelligence";
 
 const TryPulse = () => {
-  const Button = styled.button`
-    margin-top: 30px;
-    padding: 12px 30px;
-    margin-bottom: 12px;
-    background: #2978d1;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    const Button = styled.button`
+  margin-top: 30px;
+  padding: 12px 30px; /* Smaller width */
+  margin-bottom: 12px;
+  /* background-color: #4F46E5; Blue button */
+  background: #2978D1;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-    &:hover {
-      background-color: #6366f1;
-    }
-  `;
-
+  &:hover {
+    background-color: #6366F1;
+  }
+`;
   return (
     <div className="main-wrapper">
+      <ExploreAIIntelligence />
       <div className="wrapper">
-        <div className="pulse-container">
+        <div className="pulse-contain">
           <div>
             <span
               style={{
@@ -36,8 +39,7 @@ const TryPulse = () => {
                 fontWeight: 700,
                 lineHeight: "48px",
                 wordWrap: "break-word",
-              }}
-            >
+              }}>
               PULSE AI
             </span>
             <span
@@ -48,20 +50,14 @@ const TryPulse = () => {
                 fontWeight: 700,
                 lineHeight: "43.20px",
                 wordWrap: "break-word",
-              }}
-            >
+              }}>
               {" "}
               Chat Bot
             </span>
           </div>
-          <Link to="/messages" style={{ textDecoration: "none" }}>
-            <Button>
-              <img height={"15px"} src={icon1} alt="Chat Bot Icon" />
-              {" "}Open Chat Bot
-            </Button>
-          </Link>
+         <Button><img height={'15px'} src={icon1}/>{" "}Open Chat Bot</Button>
         </div>
-        <div className="pulse-container">
+        <div className="pulse-contain">
           <div>
             <span
               style={{
@@ -71,8 +67,7 @@ const TryPulse = () => {
                 fontWeight: 700,
                 lineHeight: "48px",
                 wordWrap: "break-word",
-              }}
-            >
+              }}>
               PULSE AI
             </span>
 
@@ -84,18 +79,12 @@ const TryPulse = () => {
                 fontWeight: 700,
                 lineHeight: "43.20px",
                 wordWrap: "break-word",
-              }}
-            >
+              }}>
               {" "}
-              Intelligence
+              Intilligence
             </span>
           </div>
-          <Link to="/voice" style={{ textDecoration: "none" }}>
-            <Button>
-              <img height={15} src={icon2} alt="Intelligence Icon" />
-              {" "}Explore Intelligence
-            </Button>
-          </Link>
+          <Button><img height={15} style={{color:"white"}} src={icon2}/>{" "}Explore Intelligence</Button>
         </div>
       </div>
     </div>

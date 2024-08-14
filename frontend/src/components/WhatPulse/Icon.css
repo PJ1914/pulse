@@ -1,42 +1,41 @@
 /* Default Styles */
-.icon {
-    position: relative;
-    margin-bottom: 5%;
-    width: 100%; /* Make it responsive by default */
-    height: auto; /* Maintain aspect ratio */
+.icon-p {
+  position: relative;
+  margin-bottom: 5%;
+  width: 99%; /* Make it responsive by default */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Media Queries */
+
+/* Small devices (phones, less than 600px) */
+@media (max-width: 599px) {
+  .icon {
+    margin-bottom: 10%;
+    width: 90%; /* Slightly reduce the width */
   }
-  
-  /* Media Queries */
-  
-  /* Small devices (phones, less than 600px) */
-  @media (max-width: 599px) {
-    .icon {
-      margin-bottom: 10%;
-      width: 90%; /* Slightly reduce the width */
-    }
+}
+
+/* Medium devices (tablets, 600px to 768px) */
+@media (min-width: 600px) and (max-width: 767px) {
+  .icon {
+    margin-bottom: 8%;
+    width: 95%; /* Use more screen width */
   }
-  
-  /* Medium devices (tablets, 600px to 768px) */
-  @media (min-width: 600px) and (max-width: 767px) {
-    .icon {
-      margin-bottom: 8%;
-      width: 95%; /* Use more screen width */
-    }
+}
+
+/* Large devices (desktops, 768px and up) */
+@media (min-width: 768px) {
+  .icon {
+    margin-bottom: 5%; /* Default margin */
+    width: 100%; /* Full width for large screens */
   }
-  
-  /* Large devices (desktops, 768px and up) */
-  @media (min-width: 768px) {
-    .icon {
-      margin-bottom: 5%; /* Default margin */
-      width: 100%; /* Full width for large screens */
-    }
+}
+
+/* Extra Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .icon {
+    margin-bottom: 3%;
+    width: 100%; /* Ensure it uses full width */
   }
-  
-  /* Extra Large devices (large desktops, 1200px and up) */
-  @media (min-width: 1200px) {
-    .icon {
-      margin-bottom: 3%;
-      width: 100%; /* Ensure it uses full width */
-    }
-  }
-  
+}

@@ -1,17 +1,21 @@
 .main-wrapper{
+    background: url('../../assets/main page/My Team Img.png') ;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: url('../../assets/main page/My Team Img.png') no-repeat center center;
+    align-items: center;
+    background-size: cover;
+    padding: 2%;
 }
 .wrapper{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    width: 100%;
 }
-.pulse-container{
+.pulse-contain{
     display: flex;
     justify-content: center;
     align-items: center;

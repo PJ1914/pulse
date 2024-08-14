@@ -5,7 +5,7 @@ const ItemList = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/, https://pulsebackend-production.up.railway')
+        axios.get('http://127.0.0.1:8000/')
             .then(response => {
                 setItems(response.data);
             })

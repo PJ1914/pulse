@@ -9,8 +9,8 @@
     gap: 5%;
     align-items: center;
     padding: 10%;
-    background-image: url("../../assets/main page/background.png");
-    background-position: 100%;
+    background-image: url("../../assets/main page/background.png") ;
+    background-size: cover;
 }
 
 .about-section {

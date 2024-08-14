@@ -5,14 +5,14 @@ import Icon from "./Icon";
 const ExploreAIIntelligence = () => {
   return (
     <>
-      <div style={{ position: "absolute", left: "3%", paddingTop: "2%" }}>
+      <div style={{ position: "absolute", left: "5%", paddingBlockEnd: "35%" }}>
         <span
           style={{
             color: "#999999",
-            fontSize: 36,
+            fontSize: "3.5vw",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
-            lineHeight: "43.20px",
+            lineHeight: "1.2em",
             wordWrap: "break-word",
           }}
         >
@@ -21,10 +21,10 @@ const ExploreAIIntelligence = () => {
         <span
           style={{
             color: "white",
-            fontSize: 40,
+            fontSize: "3.5vw",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
-            lineHeight: "48px",
+            lineHeight: "1.2em",
             wordWrap: "break-word",
           }}
         >
@@ -34,10 +34,10 @@ const ExploreAIIntelligence = () => {
         <span
           style={{
             color: "white",
-            fontSize: 36,
+            fontSize: "3vw",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
-            lineHeight: "43.20px",
+            lineHeight: "1.2em",
             wordWrap: "break-word",
           }}
         >
@@ -46,10 +46,10 @@ const ExploreAIIntelligence = () => {
         <span
           style={{
             color: "#999999",
-            fontSize: 36,
+            fontSize: "3vw",
             fontFamily: "MADE Tommy Soft",
             fontWeight: 700,
-            lineHeight: "43.20px",
+            lineHeight: "1.2em",
             wordWrap: "break-word",
           }}
         >
@@ -60,18 +60,18 @@ const ExploreAIIntelligence = () => {
       <div
         style={{
           position: "absolute",
-          left: "3%",
-          top: "80%",
-          width: "1378px",
-          height: "178px",
+          left: "4%",
+          marginBottom: "20%",
+          width: "94%",
+          maxWidth: "1378px",
           color: "#E9E9E9",
-          fontSize: "24px",
+          fontSize: "2vw",
           fontFamily: "Arial",
-          fontWeight: "700",
-          lineHeight: "28.80px",
+          fontWeight: 700,
+          lineHeight: "1.2em",
           wordWrap: "break-word",
-          marginTop: "20px",
-          padding: "10px",
+          marginTop: "2%",
+          padding: "1%",
         }}
       >
         Scroll down to explore the technology behind Pulse AI and meet the team

@@ -4,8 +4,8 @@ import axios from "axios";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { toast, ToastContainer } from "react-toastify";
 import { IoSendSharp, IoSettingsOutline } from "react-icons/io5";
+import DNL from './DNL'
 import { BsSun, BsMoon } from "react-icons/bs";
-import "react-toastify/dist/ReactToastify.css";
 import { auth, db } from "../../config/config";
 import { onAuthStateChanged } from "firebase/auth";
 import {
