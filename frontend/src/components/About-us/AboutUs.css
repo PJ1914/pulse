@@ -130,8 +130,8 @@
   }
 
   .tree {
-      height: 70%;
-      padding-right: 5px;
+      height: 65%;
+      padding-right: 3px;
   }
 
   .right {
@@ -139,7 +139,7 @@
   }
 
   .about-image {
-      height: 250px;
+      height: auto;
       width: 100%;
   }
 
@@ -170,7 +170,9 @@
 @media (min-width: 481px) and (max-width: 768px) {
   .about-wrapper {
       flex-direction: column;
-      padding: 7%;
+      padding: 10%;
+      height: auto;
+      gap: 50PX;
   }
 
   .about-section {
@@ -189,7 +191,7 @@
   }
 
   .about-image {
-      height: 350px;
+      height: auto;
       width: 100%;
   }
 
@@ -214,3 +216,60 @@
       line-height: 40px;
   }
 }
+
+/* Tablets - 769px to 1199px */
+@media (min-width: 769px) and (max-width: 1199px) {
+    .about-wrapper {
+        flex-direction: column;
+        padding: 8%;
+        height: auto;
+        gap: 50px;
+    }
+  
+    .about-section {
+        width: 75%;
+        padding: 10%;
+        border-radius: 4%;
+        height: auto;
+    }
+  
+    .tree {
+        height: 80%;
+        padding-right: 7px;
+    }
+  
+    .right {
+        width: 100%;
+    }
+  
+    .about-image {
+        height: auto;
+        width: 75%;
+        left: 13%;
+    }
+  
+    .dots {
+        bottom: 12px;
+    }
+  
+    .dot {
+        font-size: 28px;
+    }
+  
+    .about-h1 {
+        font-size: 28px;
+        line-height: 36px;
+    }
+  
+    .arrow {
+        width: 35%;
+    }
+  
+    .about-p {
+        font-size: 20px;
+        line-height: 30px;
+    }
+  }
+
+  
+  

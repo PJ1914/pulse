@@ -12,10 +12,10 @@ const WhatPulseAiCanDo = () => {
       }}
     >
       <div className="title-1">
-        <span style={{ color: "#999999" }}>WHAT</span>
+        <span style={{ color: "#999999" }}>What</span>
         <span style={{ color: "white" }}> PULSE AI</span>
         <span style={{ color: "white" }}> </span>
-        <span style={{ color: "#999999" }}> CAN DO</span>
+        <span style={{ color: "#999999" }}> Can Do</span>
       </div>
       <Icon />
       <div className="content-1">
@@ -28,7 +28,7 @@ const WhatPulseAiCanDo = () => {
         <span style={{ color: "#999999" }}> Intelligence</span>
       </div>
       <Icon />
-      <div className="content-2" style={{ top: "65%" }}>
+      <div className="content-2">
         Dive into Pulse Al Intelligence for advanced data analysis and smart technology solutions. Personalize your experience with interactive buttons and icons, making it easy to get exactly what you need from the platform.
       </div>
     </div>

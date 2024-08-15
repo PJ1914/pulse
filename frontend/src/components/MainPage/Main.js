@@ -107,10 +107,10 @@ const Main = () => {
                   <Avatar
                     onClick={handleMenu}
                     style={{ cursor: 'pointer', backgroundColor: user.photoURL ? 'transparent' : '#2196f3' }}
-                    src={user.photoURL || undefined} // Use the user's photoURL if available
-                    alt={user.displayName || user.email} // Fallback to email if displayName isn't available
+                    src={user.photoURL || undefined} 
+                    alt={user.displayName || user.email} 
                   >
-                    {!user.photoURL && <Person />} {/* Display icon if no photoURL */}
+                    {!user.photoURL && <Person />} 
                   </Avatar>
                   <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
                     <MenuItem onClick={handleClose} component={Link} to='/profile'>

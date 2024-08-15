@@ -3,7 +3,6 @@
   position: relative;
   margin-bottom: 5%;
   width: 99%; /* Make it responsive by default */
-  height: auto; /* Maintain aspect ratio */
 }
 
 /* Media Queries */
@@ -19,7 +18,7 @@
 @media (min-width: 600px) and (max-width: 767px) {
   .icon-p {
     margin-bottom: 8%;
-    width: 99%; /* Use more screen width */
+    width: 99%; 
   }
 }
 

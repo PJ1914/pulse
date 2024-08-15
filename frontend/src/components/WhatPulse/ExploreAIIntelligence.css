@@ -1,78 +1,133 @@
-/* Container Styling */
-.explore-ai-container {
+.ExploreAIIntelligence {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2%;
+  position: relative;
+}
+
+/* Title 3 Styling */
+.ExploreAIIntelligence .title-3 {
+  position: absolute;
+  left: 5%;
+  top: 20%;
+  font-family: "MADE Tommy Soft";
+  font-weight: 700;
+  line-height: 1.2em;
+  word-wrap: break-word;
+}
+
+/* Tablets and medium screens (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .ExploreAIIntelligence .title-3 {
     position: absolute;
     left: 5%;
-    padding-block-end: 35%;
-  }
-  
-  /* Text Styling */
-  .explore-ai-text {
-    color: white;
+    top: 3%;
     font-family: "MADE Tommy Soft";
     font-weight: 700;
     line-height: 1.2em;
     word-wrap: break-word;
   }
-  
-  .explore-ai-text.gray {
-    color: #999999;
-  }
-  
-  /* Intro Section Styling */
-  .explore-ai-intro {
+}
+
+/* Mobile screens (below 768px) */
+@media (max-width: 767px) {
+  .ExploreAIIntelligence .title-3 {
     position: absolute;
-    left: 4%;
-    margin-bottom: 20%;
-    width: 94%;
-    max-width: 1378px;
-    color: #E9E9E9;
-    font-size: 2vw;
-    font-family: Arial, sans-serif;
+    left: 5%;
+    top: 32%;
+    font-family: "MADE Tommy Soft";
     font-weight: 700;
     line-height: 1.2em;
     word-wrap: break-word;
-    margin-top: 2%;
-    padding: 1%;
   }
-  
-  /* Responsive Text Sizes for .explore-ai-text */
-  @media (min-width: 1200px) {
-    /* Large screens, e.g., desktop */
-    .explore-ai-text {
-      font-size: 3.5vw;
-    }
+}
+
+/* Responsive Title Text Sizes for .title-1 */
+@media (min-width: 1200px) {
+  /* Large screens, e.g., desktop */
+  .ExploreAIIntelligence .title-3 span {
+    font-size: 3.5vw;
   }
-  
-  @media (min-width: 768px) and (max-width: 1199px) {
-    /* Tablets and medium screens */
-    .explore-ai-text {
-      font-size: 4vw;
-    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  /* Tablets and medium screens */
+  .ExploreAIIntelligence .title-3 span {
+    font-size: 4vw;
   }
-  
-  @media (max-width: 767px) {
-    /* Mobile screens */
-    .explore-ai-text {
-      font-size: 5.5vw;
-    }
+}
+
+@media (max-width: 767px) {
+  /* Mobile screens */
+  .ExploreAIIntelligence .title-3 span {
+    font-size: 5.5vw;
   }
-  
-  /* Responsive Intro Text Size */
-  @media (min-width: 1200px) {
-    .explore-ai-intro {
-      font-size: 2vw;
-    }
+}
+
+/* Content 3 Styling */
+.ExploreAIIntelligence .content-3 {
+  position: absolute;
+  left: 4%;
+  width: 94%;
+  max-width: 1378px;
+  color: #e9e9e9;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  margin-top: 2%;
+  padding: 1%;
+}
+
+/* Responsive Title Text Sizes for .title-3 */
+@media (min-width: 1200px) {
+  /* Large screens, e.g., desktop */
+  .ExploreAIIntelligence .title-3 span {
+    font-size: 3.5vw;
   }
-  
-  @media (min-width: 768px) and (max-width: 1199px) {
-    .explore-ai-intro {
-      font-size: 2.5vw;
-    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  /* Tablets and medium screens */
+  .ExploreAIIntelligence .title-3 span {
+    font-size: 4vw;
   }
-  
-  @media (max-width: 767px) {
-    .explore-ai-intro {
-      font-size: 3.5vw;
-    }
+}
+
+@media (max-width: 767px) {
+  /* Mobile screens */
+  .ExploreAIIntelligence .title-3 span {
+    font-size: 5.5vw;
   }
-  
+}
+
+/* Content Position and Text Sizes for Content 3 */
+@media (min-width: 1200px) {
+  /* Large screens, e.g., desktop */
+  .ExploreAIIntelligence .content-3 {
+    top: 26%;
+    font-size: 2vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  /* Tablets and medium screens */
+  .ExploreAIIntelligence .content-3 {
+    top: 18%;
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Mobile screens */
+  .ExploreAIIntelligence .content-3 {
+    top: 40%; /* Adjust this value to move the content below the title */
+    left: 5%; /* Adjust left margin */
+    font-size: 4.5vw; /* Reduce font size to fit better on smaller screens */
+    width: 90%; /* Adjust width to ensure content doesn't overflow */
+    line-height: 1.4em; /* Increase line-height for better readability */
+  }
+}
+

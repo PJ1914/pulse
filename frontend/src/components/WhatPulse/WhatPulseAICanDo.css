@@ -11,7 +11,7 @@
 .WhatPulseAiCanDo .title-1 {
   position: absolute;
   left: 5%;
-  padding-top: 3.5%;
+  top: 11%;
   font-family: "MADE Tommy Soft";
   font-weight: 700;
   line-height: 1.2em;
@@ -22,21 +22,19 @@
 .WhatPulseAiCanDo .title-2 {
   position: absolute;
   left: 5%;
-  padding-top: 3.5%;
+  top: 57%;
   font-family: "MADE Tommy Soft";
   font-weight: 700;
   line-height: 1.2em;
   word-wrap: break-word;
 }
 
-
-
 /* Tablets and medium screens (768px to 1199px) */
 @media (min-width: 768px) and (max-width: 1199px) {
   .WhatPulseAiCanDo .title-1 {
     position: absolute;
     left: 5%;
-    padding-top: 3%;
+    top: 10%;
     font-family: "MADE Tommy Soft";
     font-weight: 700;
     line-height: 1.2em;
@@ -49,7 +47,7 @@
   .WhatPulseAiCanDo .title-1 {
     position: absolute;
     left: 5%;
-    padding-top: 32%;
+    top: 17%;
     font-family: "MADE Tommy Soft";
     font-weight: 700;
     line-height: 1.2em;
@@ -64,7 +62,7 @@
   .WhatPulseAiCanDo .title-2 {
     position: absolute;
     left: 5%;
-    padding-top: 3%;
+    top: 58%;
     font-family: "MADE Tommy Soft";
     font-weight: 700;
     line-height: 1.2em;
@@ -77,7 +75,7 @@
   .WhatPulseAiCanDo .title-2 {
     position: absolute;
     left: 5%;
-    padding-top: 125%;
+    top: 67%;
     font-family: "MADE Tommy Soft";
     font-weight: 700;
     line-height: 1.2em;
@@ -172,8 +170,8 @@
 @media (min-width: 768px) and (max-width: 1199px) {
   /* Tablets and medium screens */
   .WhatPulseAiCanDo .content-1 {
-    top: 18%;
-    font-size: 2.5vw;
+    top: 14%;
+    font-size: 2.3vw;
   }
 }
 
@@ -189,7 +187,7 @@
 @media (min-width: 1200px) {
   /* Large screens, e.g., desktop */
   .WhatPulseAiCanDo .content-2 {
-    top: 65%;
+    top: 60%;
     font-size: 2vw;
   }
 }
@@ -197,8 +195,8 @@
 @media (min-width: 768px) and (max-width: 1199px) {
   /* Tablets and medium screens */
   .WhatPulseAiCanDo .content-2 {
-    top: 65%;
-    font-size: 2.5vw;
+    top: 63%;
+    font-size: 2.3vw;
   }
 }
 

@@ -182,8 +182,8 @@
     }
 
     .circuit-overlay {
-        top: 20%;
-        left: 20%;
+        top: 40%;
+        left: 27%;
         width: 60%;
         height: auto;
         opacity: 0.4;
@@ -191,8 +191,8 @@
 
     .circuit-text {
         font-size: 30px;
-        top: 42%;
-        left: 28%;
+        top: 50%;
+        left: 36%;
         text-align: center;
     }
 
@@ -257,4 +257,22 @@
         opacity: 0.8;
     }
 }
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .circuit-overlay {
+      top: 10%;
+      left: 40%;
+      background-size: 75%;
+      opacity: 0.6;
+      border-radius: 50%;
+    }
+
+    .circuit-text {
+        top: 22%;
+        left: 47%;
+    }
+
+  }
+
+  
 
