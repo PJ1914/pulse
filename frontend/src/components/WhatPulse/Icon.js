@@ -8,7 +8,7 @@ const Icon = (props) => (
     width={1478}
     height={305}
     fill="none"
-    className="icon-p" // Apply the class
+    className="icon-p" 
     {...props}
   >
     <path
