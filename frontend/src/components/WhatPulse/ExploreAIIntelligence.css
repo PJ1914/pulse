@@ -1,0 +1,78 @@
+/* Container Styling */
+.explore-ai-container {
+    position: absolute;
+    left: 5%;
+    padding-block-end: 35%;
+  }
+  
+  /* Text Styling */
+  .explore-ai-text {
+    color: white;
+    font-family: "MADE Tommy Soft";
+    font-weight: 700;
+    line-height: 1.2em;
+    word-wrap: break-word;
+  }
+  
+  .explore-ai-text.gray {
+    color: #999999;
+  }
+  
+  /* Intro Section Styling */
+  .explore-ai-intro {
+    position: absolute;
+    left: 4%;
+    margin-bottom: 20%;
+    width: 94%;
+    max-width: 1378px;
+    color: #E9E9E9;
+    font-size: 2vw;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    line-height: 1.2em;
+    word-wrap: break-word;
+    margin-top: 2%;
+    padding: 1%;
+  }
+  
+  /* Responsive Text Sizes for .explore-ai-text */
+  @media (min-width: 1200px) {
+    /* Large screens, e.g., desktop */
+    .explore-ai-text {
+      font-size: 3.5vw;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1199px) {
+    /* Tablets and medium screens */
+    .explore-ai-text {
+      font-size: 4vw;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    /* Mobile screens */
+    .explore-ai-text {
+      font-size: 5.5vw;
+    }
+  }
+  
+  /* Responsive Intro Text Size */
+  @media (min-width: 1200px) {
+    .explore-ai-intro {
+      font-size: 2vw;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .explore-ai-intro {
+      font-size: 2.5vw;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .explore-ai-intro {
+      font-size: 3.5vw;
+    }
+  }
+  
