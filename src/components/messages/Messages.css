@@ -51,7 +51,7 @@ input[type="text"]:focus {
   display: flex;
   position: fixed;
   bottom: 10px;
-  left: 30%;
+  left: 45%;
   transform: translateX(-30%);
   width: 100%;
   height: 40px;
@@ -101,16 +101,22 @@ input[type="text"]:focus {
 /* Messages */
 .messages-container {
   flex-grow: 1;
+  margin-left: 19%;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  padding: 20px 2rem; 
-  padding-bottom: 70px; 
+  /* padding: 20px 2rem;  */
+  /* padding-bottom: 70px;  */
   background-color: #F2F2F2;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   scroll-behavior: smooth;
   position: relative; 
+}
+.messages-wrapper{
+  background-color:  #494848;
+  
+
 }
 
 body.dark-mode .messages-container{
