@@ -23,6 +23,7 @@ import Gallery from "./Gallery";
 import Mic from "./Mic";
 // import ThreeBodyLoader from "./ThreeBodyLoader";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import OldChat from "./OldChat";
 
 // Messages component
 export default function Messages() {
@@ -33,7 +34,7 @@ export default function Messages() {
   const [user, setUser] = useState(null);
   const [contentCopyId, setContentCopyId] = useState([]);
   const inputRef = useRef(null);
-  
+
   const messagesContainerRef = useRef(null);
 
   const handleCopy = useCallback((id, content) => {
@@ -111,13 +112,10 @@ export default function Messages() {
         parts: [msg.content],
       }));
 
-      const response = await axios.post(
-        process.env.REACT_APP_GEMINI_URL,
-        {
-          message: prompt,
-          chatHistory: chatHistory,
-        }
-      );
+      const response = await axios.post(process.env.REACT_APP_GEMINI_URL, {
+        message: prompt,
+        chatHistory: chatHistory,
+      });
 
       if (response.status === 200) {
         const botMessage = { content: response.data.response, role: "model" };
@@ -181,10 +179,13 @@ export default function Messages() {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
-
+  const [rotate, setRotate] = useState(false);
+  const handleSettings = () => {
+    setRotate(true);
+  };
   return (
     <>
-      <div className={`container`} style={{width:"100vw"}}>
+      <div className={`container`} style={{ width: "100vw", maxWidth: "100%" }}>
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -198,22 +199,25 @@ export default function Messages() {
           theme="dark"
         />
         <Header />
-        <div ref={messagesContainerRef} className="messages-container">
-          <MessageList
-            messages={messages}
-            onCopy={handleCopy}
-            copiedIds={contentCopyId}
+        <OldChat theme={theme}/>
+        <div className="messages-wrapper">
+          <div ref={messagesContainerRef} className="messages-container">
+            <MessageList
+              messages={messages}
+              onCopy={handleCopy}
+              copiedIds={contentCopyId}
+            />
+          </div>
+          <MessageInput
+            prompt={prompt}
+            setPrompt={setPrompt}
+            loading={loading}
+            inputRef={inputRef}
+            onSend={action}
+            onFileSelect={handleFileSelect}
+            onVoiceResult={handleVoiceResult} // Pass the function here
           />
         </div>
-        <MessageInput
-          prompt={prompt}
-          setPrompt={setPrompt}
-          loading={loading}
-          inputRef={inputRef}
-          onSend={action}
-          onFileSelect={handleFileSelect}
-          onVoiceResult={handleVoiceResult} // Pass the function here
-        />
       </div>
       <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
     </>
@@ -221,6 +225,10 @@ export default function Messages() {
 }
 
 // Header component
+// const [rotate,setRotate]=useState()
+const handleSettings = () => {
+  console.log("clicked");
+};
 const Header = () => (
   <header className="header">
     <div className="header-title">
@@ -251,8 +259,7 @@ const Message = ({ message, isCopied, onCopy }) => (
   <div
     className={`message ${
       message.role === "user" ? "message-user" : "message-model"
-    }`}
-  >
+    }`}>
     {message.role !== "user" && (
       <p className="CopyContent" onClick={onCopy}>
         {isCopied ? <CheckBoxIcon /> : <ContentCopyIcon />}
@@ -326,9 +333,7 @@ const MessageInput = ({
         </div>
       </div>
       {loading ? (
-        <div className="send-button">
-          {/* <ThreeBodyLoader /> */}
-        </div>
+        <div className="send-button">{/* <ThreeBodyLoader /> */}</div>
       ) : (
         <button className="send-button" onClick={onSend} disabled={!isTyping}>
           <IoSendSharp />
@@ -340,11 +345,14 @@ const MessageInput = ({
 
 // ThemeToggle component
 const ThemeToggle = ({ theme, toggleTheme }) => (
-  <button 
-  className="ModeCard" 
-  style={{ backgroundColor: theme === "light" ? "#333" : "white" }} 
-  onClick={toggleTheme}
->
-  {theme === "light" ? <BsMoon color="white" size={24} /> : <BsSun color="#333" size={24} />}
-</button>
+  <button
+    className="ModeCard"
+    style={{ backgroundColor: theme === "light" ? "#333" : "white" }}
+    onClick={toggleTheme}>
+    {theme === "light" ? (
+      <BsMoon color="white" size={24} />
+    ) : (
+      <BsSun color="#333" size={24} />
+    )}
+  </button>
 );
